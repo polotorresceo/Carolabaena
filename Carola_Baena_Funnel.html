@@ -1,0 +1,1358 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CAROLA BAENA · Sin Filtros · Tu Cocina Saludable</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Raleway:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --noir:      #080A0C;
+  --deep:      #0E1012;
+  --panel:     #141618;
+  --surface:   #1C1F22;
+  --gold:      #C9A84C;
+  --gold-lt:   #F0D080;
+  --gold-dim:  #8B6914;
+  --gold-rose: #D4956A;
+  --sage:      #7BA99A;
+  --sage-dim:  rgba(123,169,154,0.15);
+  --cream:     #F5EFE0;
+  --mist:      rgba(245,239,224,0.6);
+  --mist-dim:  rgba(245,239,224,0.35);
+  --rose:      #C47B8A;
+  --pearl:     #FAF7F0;
+  --glow-g:    0 0 32px rgba(201,168,76,0.35), 0 0 80px rgba(201,168,76,0.1);
+  --glow-s:    0 0 24px rgba(123,169,154,0.3);
+  --r:         16px;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+
+body{
+  background:var(--noir);
+  color:var(--cream);
+  font-family:'Raleway',sans-serif;
+  font-weight:400;
+  min-height:100vh;
+  overflow-x:hidden;
+}
+
+/* ── Atmospheric background ── */
+body::before{
+  content:'';
+  position:fixed;inset:0;
+  background:
+    radial-gradient(ellipse 70% 50% at 15% 5%,  rgba(201,168,76,0.06) 0%,transparent 60%),
+    radial-gradient(ellipse 50% 70% at 85% 90%, rgba(123,169,154,0.07) 0%,transparent 60%),
+    radial-gradient(ellipse 90% 40% at 50% 50%, rgba(196,123,138,0.03) 0%,transparent 70%);
+  pointer-events:none;z-index:0;
+}
+body::after{
+  content:'';
+  position:fixed;inset:0;
+  background-image:
+    linear-gradient(rgba(201,168,76,0.025) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(201,168,76,0.025) 1px,transparent 1px);
+  background-size:60px 60px;
+  pointer-events:none;z-index:0;
+}
+
+/* ── Scanner line ── */
+.scan-line{
+  position:fixed;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--sage),transparent);
+  box-shadow:0 0 12px 2px rgba(123,169,154,0.4);
+  animation:scan 10s linear infinite;
+  z-index:1;pointer-events:none;opacity:0.5;
+}
+@keyframes scan{0%{top:-2px;opacity:0}3%{opacity:.6}97%{opacity:.6}100%{top:100vh;opacity:0}}
+
+/* ── HERO ── */
+.hero{
+  position:relative;z-index:2;
+  text-align:center;
+  padding:80px 20px 60px;
+  max-width:900px;margin:0 auto;
+}
+.hero-eyebrow{
+  font-family:'Cinzel',serif;
+  font-size:0.6rem;letter-spacing:.55em;
+  color:var(--sage);text-transform:uppercase;
+  display:block;margin-bottom:24px;
+  animation:fadeUp 1s ease both;
+}
+.hero-name{
+  font-family:'Cinzel',serif;
+  font-size:clamp(2.2rem,7vw,4.8rem);
+  font-weight:900;line-height:1;
+  letter-spacing:.06em;
+  margin-bottom:8px;
+  animation:fadeUp 1s .15s ease both;
+}
+.hero-name .g{
+  background:linear-gradient(135deg,var(--gold-dim),var(--gold),var(--gold-lt),var(--gold),var(--gold-dim));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;background-size:300% 100%;
+  animation:shimmer 6s ease-in-out infinite;
+}
+@keyframes shimmer{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+
+.hero-tagline{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(1rem,2.5vw,1.5rem);
+  font-style:italic;
+  color:var(--mist);
+  margin-bottom:28px;
+  animation:fadeUp 1s .3s ease both;
+}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+
+.hero-divider{
+  display:flex;align-items:center;gap:16px;
+  justify-content:center;margin:0 auto 28px;
+  width:280px;animation:fadeUp 1s .4s ease both;
+}
+.hero-divider::before,.hero-divider::after{
+  content:'';flex:1;height:1px;
+  background:linear-gradient(90deg,transparent,var(--gold));
+}
+.hero-divider::after{background:linear-gradient(270deg,transparent,var(--gold))}
+.hero-divider span{color:var(--gold);font-size:.5rem;letter-spacing:.3em}
+
+.hero-badges{
+  display:flex;flex-wrap:wrap;gap:10px;justify-content:center;
+  margin-bottom:40px;animation:fadeUp 1s .5s ease both;
+}
+.badge{
+  padding:6px 18px;border-radius:999px;
+  font-family:'Cinzel',serif;font-size:.55rem;letter-spacing:.25em;
+  border:1px solid rgba(201,168,76,.3);
+  color:var(--gold);background:rgba(201,168,76,.06);
+  text-transform:uppercase;
+}
+
+/* ── Stats ── */
+.stats-bar{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:2px;border-radius:var(--r);overflow:hidden;
+  border:1px solid rgba(201,168,76,.15);
+  margin-bottom:50px;animation:fadeUp 1s .6s ease both;
+}
+.stat{
+  padding:22px 16px;text-align:center;
+  background:rgba(20,22,24,.9);
+  border-right:1px solid rgba(201,168,76,.1);
+}
+.stat:last-child{border-right:none}
+.stat-num{
+  font-family:'Cinzel',serif;font-size:1.8rem;font-weight:900;
+  color:var(--gold);display:block;
+  text-shadow:var(--glow-g);
+}
+.stat-lbl{
+  font-size:.62rem;letter-spacing:.2em;color:var(--mist-dim);
+  text-transform:uppercase;margin-top:4px;display:block;
+}
+
+/* ── Main layout ── */
+.wrap{max-width:1060px;margin:0 auto;padding:0 20px 100px;position:relative;z-index:2}
+
+/* ── Section titles ── */
+.sec-title{
+  font-family:'Cinzel',serif;font-size:.72rem;
+  letter-spacing:.4em;color:var(--gold);
+  text-transform:uppercase;
+  display:flex;align-items:center;gap:14px;
+  margin-bottom:28px;
+}
+.sec-title::before{
+  content:'';display:inline-block;width:28px;height:1px;
+  background:var(--gold);box-shadow:0 0 8px rgba(201,168,76,.8);
+}
+
+/* ── Cards ── */
+.card{
+  background:linear-gradient(160deg,rgba(28,31,34,.97),rgba(14,16,18,.99));
+  border:1px solid rgba(201,168,76,.14);
+  border-radius:var(--r);padding:36px;
+  margin-bottom:24px;position:relative;overflow:hidden;
+}
+.card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent,var(--gold),var(--gold-lt),var(--gold),transparent);
+  opacity:.5;
+}
+
+/* ── FILTERS ── */
+.filters-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:16px;margin-bottom:24px;
+}
+.filter-group label{
+  display:block;
+  font-family:'Cinzel',serif;font-size:.55rem;letter-spacing:.3em;
+  color:var(--sage);text-transform:uppercase;margin-bottom:8px;
+}
+select{
+  width:100%;padding:13px 16px;
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(201,168,76,.2);
+  border-radius:10px;
+  color:var(--cream);
+  font-family:'Raleway',sans-serif;font-size:.9rem;
+  cursor:pointer;
+  appearance:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23C9A84C' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 14px center;
+  transition:border-color .3s,box-shadow .3s;
+}
+select:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,168,76,.12)}
+select option{background:var(--deep);color:var(--cream)}
+
+.btn-filter{
+  width:100%;padding:16px;
+  background:linear-gradient(135deg,rgba(201,168,76,.15),rgba(201,168,76,.08));
+  border:1px solid rgba(201,168,76,.4);
+  border-radius:12px;
+  color:var(--gold-lt);
+  font-family:'Cinzel',serif;font-size:.7rem;
+  letter-spacing:.3em;text-transform:uppercase;
+  cursor:pointer;transition:all .3s;
+  margin-top:8px;
+}
+.btn-filter:hover{
+  background:linear-gradient(135deg,rgba(201,168,76,.28),rgba(201,168,76,.15));
+  box-shadow:var(--glow-g);transform:translateY(-2px);
+}
+
+/* ── Recipe Grid ── */
+.recipe-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+  gap:16px;margin-top:24px;
+}
+.recipe-card{
+  background:rgba(20,22,24,.9);
+  border:1px solid rgba(201,168,76,.1);
+  border-radius:14px;padding:22px;
+  cursor:pointer;transition:all .35s;
+  position:relative;overflow:hidden;
+}
+.recipe-card::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(201,168,76,.05),transparent);
+  opacity:0;transition:opacity .3s;
+}
+.recipe-card:hover{
+  border-color:rgba(201,168,76,.4);
+  transform:translateY(-4px);
+  box-shadow:var(--glow-g);
+}
+.recipe-card:hover::after{opacity:1}
+.recipe-card.selected{
+  border-color:var(--gold);
+  background:rgba(201,168,76,.08);
+  box-shadow:var(--glow-g);
+}
+.rc-num{
+  font-family:'Cinzel',serif;font-size:.55rem;
+  letter-spacing:.3em;color:var(--gold-dim);
+  margin-bottom:8px;
+}
+.rc-name{
+  font-family:'Playfair Display',serif;
+  font-size:1.05rem;font-weight:700;
+  color:var(--cream);margin-bottom:8px;line-height:1.3;
+}
+.rc-meta{
+  display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px;
+}
+.rc-tag{
+  font-size:.6rem;padding:3px 10px;border-radius:999px;
+  border:1px solid rgba(123,169,154,.3);
+  color:var(--sage);letter-spacing:.1em;
+  text-transform:uppercase;
+}
+.rc-benefit{
+  font-size:.72rem;color:var(--mist-dim);
+  font-style:italic;line-height:1.4;
+}
+.rc-select-btn{
+  display:block;width:100%;margin-top:14px;padding:10px;
+  background:transparent;border:1px solid rgba(201,168,76,.2);
+  border-radius:8px;color:var(--gold);
+  font-family:'Cinzel',serif;font-size:.55rem;letter-spacing:.2em;
+  text-transform:uppercase;cursor:pointer;transition:all .3s;
+}
+.rc-select-btn:hover,.recipe-card.selected .rc-select-btn{
+  background:rgba(201,168,76,.15);border-color:var(--gold);
+}
+
+/* ── Post Generator ── */
+.gen-panel{
+  background:linear-gradient(160deg,rgba(28,31,34,.97),rgba(14,16,18,.99));
+  border:1px solid rgba(201,168,76,.18);
+  border-radius:var(--r);padding:40px;
+  margin-top:32px;position:relative;overflow:hidden;
+  display:none;
+}
+.gen-panel.visible{display:block;animation:fadeUp .6s ease both}
+.gen-panel::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent,var(--gold-rose),var(--gold),var(--gold-rose),transparent);
+  opacity:.7;
+}
+
+.gen-options{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:16px;margin-bottom:28px;
+}
+.gen-options label{
+  font-family:'Cinzel',serif;font-size:.55rem;
+  letter-spacing:.3em;color:var(--sage);
+  text-transform:uppercase;margin-bottom:8px;display:block;
+}
+
+.btn-gen{
+  width:100%;padding:20px;
+  background:linear-gradient(135deg,rgba(201,168,76,.2),rgba(212,149,106,.15));
+  border:1px solid var(--gold);
+  border-radius:14px;
+  color:var(--gold-lt);
+  font-family:'Cinzel',serif;font-size:.8rem;
+  letter-spacing:.35em;text-transform:uppercase;
+  cursor:pointer;transition:all .35s;
+  position:relative;overflow:hidden;
+}
+.btn-gen::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,transparent,rgba(201,168,76,.1),transparent);
+  transform:translateX(-100%);transition:transform .5s;
+}
+.btn-gen:hover::before{transform:translateX(100%)}
+.btn-gen:hover{
+  background:linear-gradient(135deg,rgba(201,168,76,.35),rgba(212,149,106,.25));
+  box-shadow:var(--glow-g);transform:translateY(-2px);
+}
+
+/* ── Post Output ── */
+.post-output{
+  margin-top:32px;
+  background:rgba(8,10,12,.8);
+  border:1px solid rgba(201,168,76,.25);
+  border-radius:14px;
+  padding:32px;
+  display:none;
+  position:relative;
+}
+.post-output.visible{display:block;animation:fadeUp .5s ease both}
+.post-output::before{
+  content:'◈  POST MAGNÉTICO GENERADO  ◈';
+  display:block;
+  font-family:'Cinzel',serif;font-size:.55rem;
+  letter-spacing:.35em;color:var(--gold);
+  text-transform:uppercase;margin-bottom:20px;
+  padding-bottom:14px;
+  border-bottom:1px solid rgba(201,168,76,.15);
+}
+
+.post-section{
+  margin-bottom:20px;padding:18px;
+  border-radius:10px;
+  border-left:2px solid var(--gold-dim);
+  background:rgba(201,168,76,.03);
+}
+.post-section-lbl{
+  font-family:'Cinzel',serif;font-size:.5rem;
+  letter-spacing:.3em;color:var(--sage);
+  text-transform:uppercase;margin-bottom:8px;display:block;
+}
+.post-section-txt{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.05rem;line-height:1.7;
+  color:var(--pearl);white-space:pre-wrap;
+}
+.post-section.hook{border-left-color:var(--gold);background:rgba(201,168,76,.06)}
+.post-section.hook .post-section-txt{
+  font-size:1.15rem;font-weight:600;color:var(--gold-lt);
+}
+.post-section.cta{border-left-color:var(--rose);background:rgba(196,123,138,.05)}
+
+.post-actions{
+  display:flex;gap:12px;flex-wrap:wrap;margin-top:24px;
+}
+.btn-action{
+  flex:1;min-width:140px;padding:13px 20px;
+  border-radius:10px;font-family:'Cinzel',serif;
+  font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;
+  cursor:pointer;transition:all .3s;border:1px solid;
+}
+.btn-copy{
+  background:rgba(123,169,154,.1);border-color:rgba(123,169,154,.4);
+  color:var(--sage);
+}
+.btn-copy:hover{background:rgba(123,169,154,.2);box-shadow:var(--glow-s)}
+.btn-img{
+  background:rgba(196,123,138,.08);border-color:rgba(196,123,138,.3);
+  color:var(--rose);
+}
+.btn-img:hover{background:rgba(196,123,138,.18)}
+.btn-new{
+  background:rgba(201,168,76,.08);border-color:rgba(201,168,76,.3);
+  color:var(--gold);
+}
+.btn-new:hover{background:rgba(201,168,76,.18);box-shadow:var(--glow-g)}
+
+/* ── Image Prompt Panel ── */
+.img-prompt-panel{
+  margin-top:20px;padding:20px;
+  border-radius:10px;
+  background:rgba(196,123,138,.05);
+  border:1px solid rgba(196,123,138,.2);
+  display:none;
+}
+.img-prompt-panel.visible{display:block;animation:fadeUp .4s ease both}
+.img-prompt-title{
+  font-family:'Cinzel',serif;font-size:.55rem;
+  letter-spacing:.3em;color:var(--rose);
+  text-transform:uppercase;margin-bottom:12px;
+}
+.img-prompt-box{
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(196,123,138,.2);
+  border-radius:8px;padding:16px;
+  font-family:'Raleway',sans-serif;font-size:.85rem;
+  color:var(--cream);line-height:1.6;
+  white-space:pre-wrap;word-break:break-word;
+}
+.btn-copy-img{
+  margin-top:12px;padding:11px 24px;
+  background:rgba(196,123,138,.1);border:1px solid rgba(196,123,138,.35);
+  border-radius:8px;color:var(--rose);
+  font-family:'Cinzel',serif;font-size:.55rem;letter-spacing:.2em;
+  cursor:pointer;transition:all .3s;
+}
+.btn-copy-img:hover{background:rgba(196,123,138,.22)}
+
+/* ── Selected Recipe Summary ── */
+.selected-recipe-banner{
+  display:none;
+  background:linear-gradient(135deg,rgba(201,168,76,.08),rgba(123,169,154,.05));
+  border:1px solid rgba(201,168,76,.25);
+  border-radius:12px;padding:20px 24px;
+  margin-bottom:24px;
+  animation:fadeUp .4s ease both;
+}
+.selected-recipe-banner.visible{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.srb-num{
+  font-family:'Cinzel',serif;font-size:1.4rem;
+  font-weight:900;color:var(--gold);
+  text-shadow:var(--glow-g);
+  white-space:nowrap;
+}
+.srb-info{flex:1}
+.srb-name{
+  font-family:'Playfair Display',serif;
+  font-size:1.1rem;font-weight:700;color:var(--cream);
+}
+.srb-meta{font-size:.75rem;color:var(--mist-dim);margin-top:4px}
+
+/* ── Tabs ── */
+.tabs{
+  display:flex;gap:3px;
+  background:rgba(255,255,255,.02);
+  border:1px solid rgba(201,168,76,.12);
+  border-radius:14px;padding:5px;
+  margin-bottom:36px;
+  flex-wrap:wrap;
+}
+.tab-btn{
+  flex:1;min-width:100px;padding:13px 12px;
+  border:none;border-radius:10px;
+  background:transparent;
+  color:var(--mist-dim);
+  font-family:'Cinzel',serif;
+  font-size:.58rem;font-weight:600;
+  letter-spacing:.15em;text-transform:uppercase;
+  cursor:pointer;transition:all .35s;
+}
+.tab-btn.active{
+  background:linear-gradient(135deg,rgba(201,168,76,.18),rgba(201,168,76,.08));
+  color:var(--gold-lt);
+  border:1px solid rgba(201,168,76,.3);
+  box-shadow:var(--glow-g);
+}
+.tab-btn:hover:not(.active){background:rgba(255,255,255,.03);color:var(--cream)}
+
+.panel{display:none}
+.panel.active{display:block;animation:fadeUp .5s ease both}
+
+/* ── María Prieto Structure Guide ── */
+.mp-guide{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:14px;margin-bottom:28px;
+}
+.mp-step{
+  padding:18px;border-radius:12px;
+  background:rgba(20,22,24,.9);
+  border:1px solid rgba(201,168,76,.1);
+  position:relative;overflow:hidden;
+}
+.mp-step::before{
+  content:'';position:absolute;top:0;left:0;
+  width:3px;height:100%;
+  background:var(--gold);opacity:.5;
+}
+.mp-step-num{
+  font-family:'Cinzel',serif;font-size:.5rem;
+  letter-spacing:.3em;color:var(--gold-dim);margin-bottom:6px;
+}
+.mp-step-name{
+  font-family:'Playfair Display',serif;
+  font-size:.95rem;font-weight:700;color:var(--gold-lt);
+  margin-bottom:6px;
+}
+.mp-step-desc{font-size:.8rem;color:var(--mist-dim);line-height:1.5}
+
+/* ── Toast ── */
+.toast{
+  position:fixed;bottom:30px;left:50%;
+  transform:translateX(-50%) translateY(20px);
+  background:rgba(20,22,24,.97);
+  border:1px solid var(--gold);
+  border-radius:999px;
+  padding:12px 28px;
+  font-family:'Cinzel',serif;font-size:.6rem;
+  letter-spacing:.2em;color:var(--gold-lt);
+  opacity:0;transition:all .35s;z-index:9999;
+  white-space:nowrap;
+  box-shadow:var(--glow-g);
+}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* ── Loading ── */
+.loading{
+  display:none;
+  text-align:center;padding:40px;
+}
+.loading.visible{display:block}
+.loading-dot{
+  display:inline-block;width:8px;height:8px;border-radius:50%;
+  background:var(--gold);margin:0 4px;
+  animation:bounce .9s ease infinite;
+}
+.loading-dot:nth-child(2){animation-delay:.15s}
+.loading-dot:nth-child(3){animation-delay:.3s}
+@keyframes bounce{0%,100%{transform:translateY(0);opacity:.4}50%{transform:translateY(-10px);opacity:1}}
+.loading-txt{
+  font-family:'Cormorant Garamond',serif;
+  font-style:italic;color:var(--mist-dim);
+  margin-top:16px;font-size:1rem;
+}
+
+/* ── Count badge ── */
+.count-badge{
+  display:inline-block;padding:4px 12px;border-radius:999px;
+  background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.2);
+  font-family:'Cinzel',serif;font-size:.55rem;
+  letter-spacing:.2em;color:var(--gold);margin-left:12px;
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:var(--noir)}
+::-webkit-scrollbar-thumb{background:var(--gold-dim);border-radius:2px}
+
+/* ── Responsive ── */
+@media(max-width:600px){
+  .hero{padding:50px 16px 40px}
+  .hero-name{font-size:2rem}
+  .stats-bar{grid-template-columns:1fr}
+  .card,.gen-panel{padding:22px}
+  .filters-grid,.gen-options{grid-template-columns:1fr}
+  .tabs{flex-direction:column}
+  .tab-btn{min-width:unset}
+}
+</style>
+</head>
+<body>
+<div class="scan-line"></div>
+
+<!-- ════════════════════════════════════════════
+     HERO
+════════════════════════════════════════════ -->
+<section class="hero">
+  <span class="hero-eyebrow">✦ Sistema de Contenido Saludable ✦</span>
+  <h1 class="hero-name">
+    <span class="g">CAROLA BAENA</span>
+  </h1>
+  <p class="hero-tagline">Sin Filtros · Tu Cocina Saludable</p>
+  <div class="hero-divider"><span>◆</span></div>
+  <div class="hero-badges">
+    <span class="badge">120 Recetas</span>
+    <span class="badge">Dieta Mediterránea</span>
+    <span class="badge">DASH · Antiinflamatorio</span>
+    <span class="badge">Posts Magnéticos</span>
+    <span class="badge">Estructura María Prieto</span>
+  </div>
+  <div class="stats-bar" style="max-width:600px;margin:0 auto 50px">
+    <div class="stat">
+      <span class="stat-num">120</span>
+      <span class="stat-lbl">Recetas</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">8</span>
+      <span class="stat-lbl">Categorías</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">4</span>
+      <span class="stat-lbl">Meses de Contenido</span>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════
+     MAIN
+════════════════════════════════════════════ -->
+<div class="wrap">
+
+  <!-- TABS -->
+  <div class="tabs">
+    <button class="tab-btn active" onclick="showTab('recetario')">📖 Recetario</button>
+    <button class="tab-btn" onclick="showTab('generar')">✨ Generar Post</button>
+    <button class="tab-btn" onclick="showTab('estructura')">💡 Estructura MP</button>
+    <button class="tab-btn" onclick="showTab('guia')">🎯 Guía Imagen</button>
+  </div>
+
+  <!-- ═══ TAB: RECETARIO ═══ -->
+  <div id="tab-recetario" class="panel active">
+    <div class="card">
+      <div class="sec-title">Buscar Receta Ideal</div>
+      <div class="filters-grid">
+        <div class="filter-group">
+          <label>Plataforma</label>
+          <select id="f-red">
+            <option value="">Todas las plataformas</option>
+            <option value="Instagram">Instagram</option>
+            <option value="Facebook">Facebook</option>
+            <option value="TikTok">TikTok</option>
+            <option value="WhatsApp">WhatsApp</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label>Propósito de Salud</label>
+          <select id="f-cat">
+            <option value="">Todas las categorías</option>
+            <option value="Bajar de Peso sin Hambre">Bajar de Peso sin Hambre</option>
+            <option value="Ganar Musculo y Proteina">Ganar Músculo / Proteína</option>
+            <option value="Energia y Vitalidad">Energía y Vitalidad</option>
+            <option value="Salud Digestiva">Salud Digestiva</option>
+            <option value="Antiinflamatorio y Minerales">Antiinflamatorio y Minerales</option>
+            <option value="Para Hipertensos">Para Hipertensos</option>
+            <option value="Dieta Mediterranea">Dieta Mediterránea</option>
+            <option value="DASH y Mediterranea Avanzada">DASH Avanzada</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label>Ingrediente Principal</label>
+          <select id="f-ing">
+            <option value="">Todos los ingredientes</option>
+            <option value="pollo">🐔 Pollo</option>
+            <option value="pescado">🐟 Pescado / Mariscos</option>
+            <option value="res">🥩 Carne de Res</option>
+            <option value="pavo">🦃 Pavo</option>
+            <option value="huevo">🥚 Huevo</option>
+            <option value="legumbres">🫘 Legumbres / Frijoles</option>
+            <option value="vegetariano">🥦 Vegetariano</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label>Tiempo de Preparación</label>
+          <select id="f-tiempo">
+            <option value="">Cualquier tiempo</option>
+            <option value="rapido">⚡ Menos de 20 min</option>
+            <option value="medio">⏱ 20 - 40 min</option>
+            <option value="largo">🕐 Más de 40 min</option>
+          </select>
+        </div>
+      </div>
+      <button class="btn-filter" onclick="filtrarRecetas()">
+        ✦ BUSCAR RECETAS PERFECTAS ✦
+      </button>
+    </div>
+
+    <div style="display:flex;align-items:center;margin-bottom:16px">
+      <div class="sec-title" style="margin-bottom:0">Recetario Completo</div>
+      <span class="count-badge" id="count-badge">120 recetas</span>
+    </div>
+
+    <div id="recipe-grid" class="recipe-grid"></div>
+  </div>
+
+  <!-- ═══ TAB: GENERAR POST ═══ -->
+  <div id="tab-generar" class="panel">
+
+    <div id="selected-banner" class="selected-recipe-banner">
+      <div class="srb-num" id="srb-num">#001</div>
+      <div class="srb-info">
+        <div class="srb-name" id="srb-name">Receta seleccionada</div>
+        <div class="srb-meta" id="srb-meta"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="sec-title">Configurar el Post Magnético</div>
+      <div class="gen-options">
+        <div>
+          <label>Plataforma</label>
+          <select id="g-red">
+            <option value="Instagram">📸 Instagram</option>
+            <option value="Facebook">👥 Facebook</option>
+            <option value="TikTok">🎵 TikTok</option>
+            <option value="WhatsApp">💬 WhatsApp Status</option>
+          </select>
+        </div>
+        <div>
+          <label>Objetivo del Post</label>
+          <select id="g-meta">
+            <option value="bajar de peso sin pasar hambre">Bajar de Peso sin Hambre</option>
+            <option value="ganar musculo y proteina">Ganar Músculo</option>
+            <option value="tener mas energia y vitalidad">Más Energía</option>
+            <option value="mejorar la digestión y el intestino">Salud Digestiva</option>
+            <option value="reducir inflamacion y dolor">Reducir Inflamación</option>
+            <option value="controlar la presion arterial naturalmente">Controlar Presión</option>
+            <option value="comer como las mujeres mediterráneas que envejecen radiantes">Dieta Mediterránea</option>
+          </select>
+        </div>
+        <div>
+          <label>Tono del Post</label>
+          <select id="g-tono">
+            <option value="empático y cercano, como una amiga que te cuida">Empático / Amiga</option>
+            <option value="científico y educativo pero accesible">Educativo / Científico</option>
+            <option value="motivacional y energizante">Motivacional</option>
+            <option value="íntimo y confesional">Íntimo / Confesional</option>
+          </select>
+        </div>
+        <div>
+          <label>Receta # (o selecciona arriba)</label>
+          <select id="g-receta">
+            <option value="">— Selecciona del Recetario —</option>
+          </select>
+        </div>
+      </div>
+      <button class="btn-gen" onclick="generarPost()">
+        ✦ CREAR POST MAGNÉTICO AHORA ✦
+      </button>
+    </div>
+
+    <div id="loading-post" class="loading">
+      <div>
+        <div class="loading-dot"></div>
+        <div class="loading-dot"></div>
+        <div class="loading-dot"></div>
+      </div>
+      <div class="loading-txt">Creando tu post magnético con estructura María Prieto…</div>
+    </div>
+
+    <div id="post-output" class="post-output"></div>
+  </div>
+
+  <!-- ═══ TAB: ESTRUCTURA MP ═══ -->
+  <div id="tab-estructura" class="panel">
+    <div class="card">
+      <div class="sec-title">La Estructura María Prieto</div>
+      <p style="font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-style:italic;color:var(--mist);margin-bottom:28px;line-height:1.7">
+        María Prieto es una de las influencers de salud y bienestar más efectivas del mundo hispanohablante.
+        Su estructura de posts convierte lectores en comunidad y comunidad en clientes.
+        Esta es la fórmula que usamos para cada post generado.
+      </p>
+      <div class="mp-guide">
+        <div class="mp-step">
+          <div class="mp-step-num">PASO 01 · GANCHO</div>
+          <div class="mp-step-name">Para el scroll</div>
+          <div class="mp-step-desc">Una pregunta provocadora, un dato impactante o una afirmación que desafía lo que la lectora cree saber. Debe crear una micro-crisis emocional en 3 segundos.</div>
+        </div>
+        <div class="mp-step">
+          <div class="mp-step-num">PASO 02 · PROBLEMA</div>
+          <div class="mp-step-name">Nombra el dolor</div>
+          <div class="mp-step-desc">2-3 líneas que describen con exactitud el dolor que siente la lectora. Cuanto más específico, más conexión. Que sienta "me está hablando a mí".</div>
+        </div>
+        <div class="mp-step">
+          <div class="mp-step-num">PASO 03 · PUENTE</div>
+          <div class="mp-step-name">La esperanza existe</div>
+          <div class="mp-step-desc">Una frase que abre la puerta. La solución existe y es más simple de lo que piensa. Este es el momento bisagra entre el dolor y la esperanza.</div>
+        </div>
+        <div class="mp-step">
+          <div class="mp-step-num">PASO 04 · RECETA</div>
+          <div class="mp-step-name">El valor real</div>
+          <div class="mp-step-desc">Nombre del platillo + beneficio principal + los 3 ingredientes clave + el paso más importante de la preparación. Concreto y accionable.</div>
+        </div>
+        <div class="mp-step">
+          <div class="mp-step-num">PASO 05 · DATO CIENTÍFICO</div>
+          <div class="mp-step-name">La prueba</div>
+          <div class="mp-step-desc">Un dato nutricional sorprendente y memorable. Simple, específico, verificable. Este dato es lo que se comparte. Es el engine viral del post.</div>
+        </div>
+        <div class="mp-step">
+          <div class="mp-step-num">PASO 06 · MENCIÓN EQUIPO</div>
+          <div class="mp-step-name">El toque sutil</div>
+          <div class="mp-step-desc">Una mención natural y no invasiva del acero quirúrgico. Nunca como venta, siempre como potenciador de los beneficios de la receta.</div>
+        </div>
+        <div class="mp-step">
+          <div class="mp-step-num">PASO 07 · CTA</div>
+          <div class="mp-step-name">La invitación</div>
+          <div class="mp-step-desc">Una llamada a la acción suave y social. Guardar, compartir, comentar o preguntar. Nunca "compra ahora". Siempre conversación primero.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ TAB: GUÍA IMAGEN ═══ -->
+  <div id="tab-guia" class="panel">
+    <div class="card">
+      <div class="sec-title">Prompt para Imagen Hiperrealista</div>
+      <p style="font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-style:italic;color:var(--mist);margin-bottom:24px;line-height:1.7">
+        Una vez que tienes tu post, pide la imagen a Gemini o GPT-4o con este prompt personalizado.
+        Copia, reemplaza el nombre del platillo y pega directamente.
+      </p>
+
+      <div style="margin-bottom:20px">
+        <label style="font-family:'Cinzel',serif;font-size:.55rem;letter-spacing:.3em;color:var(--sage);text-transform:uppercase;display:block;margin-bottom:8px">Nombre del Platillo</label>
+        <input type="text" id="img-platillo" placeholder="ej: Salmon con Aceitunas y Alcaparras"
+          style="width:100%;padding:13px 16px;background:rgba(255,255,255,.04);border:1px solid rgba(201,168,76,.2);border-radius:10px;color:var(--cream);font-family:'Raleway',sans-serif;font-size:.9rem;outline:none;transition:border-color .3s"
+          oninput="updateImgPrompt()">
+      </div>
+
+      <div style="margin-bottom:16px">
+        <div class="img-prompt-title">PROMPT COMPLETO PARA GEMINI / GPT-4o</div>
+        <div id="img-prompt-display" class="img-prompt-box"></div>
+        <button class="btn-copy-img" onclick="copyImgPrompt()">⧉ COPIAR PROMPT COMPLETO</button>
+      </div>
+
+      <div class="card" style="margin-top:24px;padding:24px">
+        <div class="sec-title">Flujo Completo de Producción</div>
+        <div style="display:grid;gap:14px">
+          <div style="display:flex;gap:16px;align-items:flex-start;padding:14px;border-radius:10px;background:rgba(123,169,154,.05);border:1px solid rgba(123,169,154,.15)">
+            <span style="font-family:'Cinzel',serif;font-size:1.2rem;color:var(--sage);font-weight:900;min-width:32px">1</span>
+            <div>
+              <div style="font-family:'Cinzel',serif;font-size:.7rem;letter-spacing:.2em;color:var(--sage);margin-bottom:4px">SELECCIONA LA RECETA</div>
+              <div style="font-size:.85rem;color:var(--mist-dim)">Ve al Recetario, filtra por ingrediente o propósito, elige la receta del día.</div>
+            </div>
+          </div>
+          <div style="display:flex;gap:16px;align-items:flex-start;padding:14px;border-radius:10px;background:rgba(201,168,76,.04);border:1px solid rgba(201,168,76,.12)">
+            <span style="font-family:'Cinzel',serif;font-size:1.2rem;color:var(--gold);font-weight:900;min-width:32px">2</span>
+            <div>
+              <div style="font-family:'Cinzel',serif;font-size:.7rem;letter-spacing:.2em;color:var(--gold);margin-bottom:4px">GENERA EL POST</div>
+              <div style="font-size:.85rem;color:var(--mist-dim)">Ve a "Generar Post", selecciona plataforma, objetivo y tono. Genera en segundos.</div>
+            </div>
+          </div>
+          <div style="display:flex;gap:16px;align-items:flex-start;padding:14px;border-radius:10px;background:rgba(196,123,138,.04);border:1px solid rgba(196,123,138,.15)">
+            <span style="font-family:'Cinzel',serif;font-size:1.2rem;color:var(--rose);font-weight:900;min-width:32px">3</span>
+            <div>
+              <div style="font-family:'Cinzel',serif;font-size:.7rem;letter-spacing:.2em;color:var(--rose);margin-bottom:4px">PIDE LA IMAGEN</div>
+              <div style="font-size:.85rem;color:var(--mist-dim)">Usa el prompt de esta pestaña en Gemini o GPT-4o. Imagen hiperrealista 4K lista.</div>
+            </div>
+          </div>
+          <div style="display:flex;gap:16px;align-items:flex-start;padding:14px;border-radius:10px;background:rgba(123,169,154,.05);border:1px solid rgba(123,169,154,.15)">
+            <span style="font-family:'Cinzel',serif;font-size:1.2rem;color:var(--sage);font-weight:900;min-width:32px">4</span>
+            <div>
+              <div style="font-family:'Cinzel',serif;font-size:.7rem;letter-spacing:.2em;color:var(--sage);margin-bottom:4px">PUBLICA Y REPITE</div>
+              <div style="font-size:.85rem;color:var(--mist-dim)">Texto + Imagen = post magnético completo. 120 recetas = 4 meses sin repetirse.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /wrap -->
+
+<div id="toast" class="toast"></div>
+
+<script>
+/* ══════════════════════════════════════════
+   BASE DE RECETAS — 120 completas
+══════════════════════════════════════════ */
+const RECETAS = [
+  {n:1,  cat:"Bajar de Peso sin Hambre",    nom:"Sopa de Verduras Saciante",          ben:"Alta fibra • Baja calorías • Saciante 4 horas",    ing:"vegetariano", t:30,  porcs:"4",   nota:"El acero quirúrgico permite cocinar sin aceite, reduciendo hasta 80% las calorías.",        ing_lista:"calabacitas, zanahorias, ejotes, apio, cebolla, ajo, caldo verduras, comino, cilantro",              prep:"Saltea cebolla y ajo sin aceite • agrega verduras • cuece 20 min tapado"},
+  {n:2,  cat:"Bajar de Peso sin Hambre",    nom:"Pechuga al Limón y Hierbas",          ben:"Alta proteína • 0 grasa añadida • Sin culpa",       ing:"pollo",        t:25,  porcs:"2",   nota:"El acero sella jugos y nutrientes sin necesidad de grasa.",                               ing_lista:"pechugas, limón, ajo, orégano, romero",                                                                prep:"Marina 15 min • sella 3 min/lado sin aceite • cuece tapado 15 min"},
+  {n:3,  cat:"Bajar de Peso sin Hambre",    nom:"Crema de Brócoli sin Crema",          ben:"Vitamina C • Fibra • Detox natural",                 ing:"vegetariano", t:25,  porcs:"4",   nota:"El brócoli en acero quirúrgico conserva el 90% de su vitamina C.",                        ing_lista:"brócoli, cebolla, ajo, caldo verduras, leche almendra, nuez moscada",                                 prep:"Saltea cebolla/ajo • agrega brócoli y caldo • licúa con leche almendra"},
+  {n:4,  cat:"Bajar de Peso sin Hambre",    nom:"Ensalada Tibia de Pollo y Espinacas", ben:"Hierro • Proteína • Antioxidantes",                  ing:"pollo",        t:20,  porcs:"2",   nota:"El calor del pollo marchita las espinacas facilitando la absorción del hierro.",          ing_lista:"pechuga cocida, espinacas baby, tomates cherry, cebolla morada, limón, vinagre manzana",              prep:"Saltea pollo • mezcla espinacas/tomates • aderezo limón y vinagre"},
+  {n:5,  cat:"Bajar de Peso sin Hambre",    nom:"Lentejas Rojas con Curry",            ben:"Fibra soluble • Saciedad prolongada",                ing:"legumbres",    t:30,  porcs:"4",   nota:"Las lentejas rojas tienen el doble de fibra que las verdes.",                             ing_lista:"lentejas rojas, cebolla, ajo, curry, cúrcuma, tomates, cilantro",                                     prep:"Saltea cebolla/ajo/curry • agrega lentejas y agua • cuece 25 min"},
+  {n:6,  cat:"Bajar de Peso sin Hambre",    nom:"Calabacita Rellena de Pavo",          ben:"Baja calorías • Alta proteína magra",                ing:"pavo",         t:40,  porcs:"2",   nota:"El pavo tiene 60% menos grasa que la res con igual proteína.",                           ing_lista:"calabacitas, pavo molido, cebolla, ajo, jitomate, orégano",                                           prep:"Saca la pulpa • saltea relleno con pavo • rellena y cuece 20 min tapado"},
+  {n:7,  cat:"Bajar de Peso sin Hambre",    nom:"Caldo Detox de Jengibre",             ben:"Diurético • Depurativo • Activa metabolismo",        ing:"vegetariano", t:25,  porcs:"4",   nota:"Activa el metabolismo y reduce retención de líquidos desde la primera semana.",          ing_lista:"agua, jengibre fresco, apio, zanahorias, limón, cúrcuma, sal de mar",                                 prep:"Hierve agua • agrega jengibre/apio/zanahoria • cuece 20 min • cuela"},
+  {n:8,  cat:"Bajar de Peso sin Hambre",    nom:"Filete de Pescado al Vapor",          ben:"Omega 3 • Bajo en grasa • Proteína completa",        ing:"pescado",      t:20,  porcs:"2",   nota:"La cocción al vapor en acero quirúrgico preserva todos los ácidos grasos omega-3.",      ing_lista:"tilapia o robalo, limón, ajo, eneldo, sal, pimienta blanca",                                          prep:"Sazona filetes • agrega agua en olla • cuece al vapor 12-15 min tapado"},
+  {n:9,  cat:"Bajar de Peso sin Hambre",    nom:"Avena Proteica con Canela",           ben:"Beta-glucano • Control glucémico • Sin antojos",     ing:"vegetariano", t:10,  porcs:"1",   nota:"Esta avena mantiene glucosa estable 4 horas, eliminando el antojo a media mañana.",      ing_lista:"avena, leche almendra, proteína en polvo, canela, plátano, chía, stevia",                             prep:"Calienta leche • agrega avena 5 min • sirve con plátano y chía"},
+  {n:10, cat:"Bajar de Peso sin Hambre",    nom:"Gazpacho Mexicano Saciante",          ben:"Vitamina C • Sin calorías vacías • Hidratante",      ing:"vegetariano", t:15,  porcs:"2",   nota:"El gazpacho tiene menos de 80 calorías y sacia igual que una sopa caliente.",           ing_lista:"jitomates, pepino, pimiento rojo, cebolla, ajo, limón, cilantro",                                     prep:"Licúa todo en frío • cuela • refrigera 30 min • sirve frío"},
+  {n:11, cat:"Bajar de Peso sin Hambre",    nom:"Pollo en Salsa Verde Light",          ben:"Proteína magra • Bajo sodio • Saciante",             ing:"pollo",        t:35,  porcs:"3",   nota:"La espinaca en la salsa verde duplica el hierro sin cambiar el sabor.",                 ing_lista:"pechugas, tomatillos, espinacas, chile poblano, cebolla, ajo, cilantro",                              prep:"Sella pollo • licúa salsa verde con espinacas • cuece tapado 20 min"},
+  {n:12, cat:"Bajar de Peso sin Hambre",    nom:"Sopa de Champiñones sin Grasa",       ben:"Vitamina D • Bajo calorías • Inmunomodulador",       ing:"vegetariano", t:20,  porcs:"3",   nota:"Los champiñones son uno de los pocos alimentos no animales con vitamina D.",           ing_lista:"champiñones surtidos, cebolla, ajo, caldo verduras, leche avena, tomillo",                            prep:"Saltea cebolla/ajo/champiñones • agrega caldo • licúa parcialmente"},
+  {n:13, cat:"Bajar de Peso sin Hambre",    nom:"Atún con Vegetales al Wok",           ben:"Omega 3 • Alta proteína • Solo 15 minutos",          ing:"pescado",      t:15,  porcs:"2",   nota:"Esta combinación tiene más proteína por caloría que cualquier carne de res.",          ing_lista:"atún en agua, pimiento rojo, zucchini, brócoli, ajo, soya baja sodio, jengibre",                     prep:"Saltea ajo/jengibre • agrega vegetales 5 min • incorpora atún y soya"},
+  {n:14, cat:"Bajar de Peso sin Hambre",    nom:"Crema de Espinacas y Aguacate",       ben:"Grasas buenas • Fibra • Vitamina K",                 ing:"vegetariano", t:15,  porcs:"2",   nota:"El aguacate aumenta la absorción de nutrientes de las espinacas hasta 400%.",          ing_lista:"espinacas, aguacate maduro, cebolla, ajo, caldo verduras, limón",                                     prep:"Saltea cebolla/ajo/espinacas • retira del fuego • agrega aguacate • licúa"},
+  {n:15, cat:"Bajar de Peso sin Hambre",    nom:"Tacos de Lechuga con Pavo",           ben:"Sin gluten • Sin tortilla • Alta proteína",          ing:"pavo",         t:20,  porcs:"2",   nota:"Eliminar la tortilla reduce 120 calorías por taco.",                                     ing_lista:"pavo molido, hojas lechuga orejona, cebolla, jitomate, jalapeño, comino",                             prep:"Cocina pavo con especias • sirve en hojas de lechuga • sirve con limón"},
+  {n:16, cat:"Bajar de Peso sin Hambre",    nom:"Sopa de Tomate y Albahaca",           ben:"Licopeno • Antioxidante • Menos de 100 cal",         ing:"vegetariano", t:20,  porcs:"4",   nota:"El jitomate rostizado duplica su licopeno, el antioxidante que protege piel y corazón.",ing_lista:"jitomates maduros, cebolla, ajo, albahaca fresca, caldo verduras",                                    prep:"Rostiza jitomates sin aceite • agrega caldo • licúa con albahaca fresca"},
+  {n:17, cat:"Bajar de Peso sin Hambre",    nom:"Pollo con Pepino y Menta",            ben:"Hidratante • Digestivo • Muy ligero",                ing:"pollo",        t:20,  porcs:"2",   nota:"La menta activa enzimas digestivas y reduce la inflamación intestinal.",                ing_lista:"pechuga, pepino, menta fresca, limón, vinagre de manzana",                                            prep:"Cuece pollo • mezcla con pepino y menta • aderezo limón/vinagre • refrigera"},
+  {n:18, cat:"Bajar de Peso sin Hambre",    nom:"Estofado de Verduras y Garbanzos",    ben:"Proteína vegetal • Fibra doble • Saciante",          ing:"legumbres",    t:30,  porcs:"4",   nota:"Los garbanzos tienen índice glucémico de 28, uno de los más bajos.",                   ing_lista:"garbanzos, papas, zanahorias, ejotes, cebolla, ajo, caldo, paprika",                                 prep:"Saltea cebolla/ajo • sella papas • agrega garbanzos/ejotes/caldo • 20 min"},
+  {n:19, cat:"Bajar de Peso sin Hambre",    nom:"Huevo Pochado con Espinacas",         ben:"Proteína completa • Hierro • Solo 150 calorías",     ing:"huevo",        t:12,  porcs:"1",   nota:"Un huevo pochado tiene la misma proteína que uno frito pero 0 grasa añadida.",         ing_lista:"huevos, espinacas baby, jitomates, ajo, orégano, vinagre blanco",                                     prep:"Saltea espinacas/jitomate • hierve agua con vinagre • pocha huevos 3-4 min"},
+  {n:20, cat:"Bajar de Peso sin Hambre",    nom:"Salmón con Ensalada de Pepino",       ben:"Omega 3 • Anti-retención • Saciante",                ing:"pescado",      t:20,  porcs:"2",   nota:"El salmón inhibe la hormona cortisol que promueve la grasa abdominal.",                ing_lista:"filetes salmón, pepino, eneldo fresco, limón, cebolla morada",                                        prep:"Sella salmón 4 min/lado sin aceite • mezcla pepino/eneldo • sirve frío"},
+  {n:21, cat:"Ganar Musculo y Proteina",    nom:"Pollo con Garbanzos y Espinacas",     ben:"30g proteína • Aminoácidos completos",               ing:"pollo",        t:35,  porcs:"3",   nota:"Pollo + garbanzos = proteína completa con todos los aminoácidos esenciales.",          ing_lista:"pechugas, garbanzos, espinacas, cebolla, ajo, paprika, caldo pollo",                                 prep:"Sella pollo • agrega garbanzos/caldo • tapa 20 min • añade espinacas 3 min"},
+  {n:22, cat:"Ganar Musculo y Proteina",    nom:"Huevo con Salmón Ahumado",            ben:"Omega 3 • Proteína completa • Vitamina D",           ing:"pescado",      t:10,  porcs:"1",   nota:"La grasa del salmón facilita la absorción de vitamina D de los huevos.",               ing_lista:"huevos, salmón ahumado, cebolla morada, cebollín, eneldo",                                            prep:"Bate huevos • cocina lentamente • incorpora salmón al final"},
+  {n:23, cat:"Ganar Musculo y Proteina",    nom:"Res con Brócoli Estilo Asian",         ben:"Hierro hemo • Zinc • 35g proteína",                  ing:"res",          t:25,  porcs:"2",   nota:"El brócoli potencia la absorción del hierro de la carne gracias a su vitamina C.",     ing_lista:"arrachera en tiras, brócoli, ajo, soya baja sodio, jengibre, sésamo",                                 prep:"Sella arrachera muy caliente • saltea brócoli/ajo • regresa carne 2 min"},
+  {n:24, cat:"Ganar Musculo y Proteina",    nom:"Sopa de Frijoles Negros con Pollo",   ben:"Proteína completa • Hierro • Fibra",                 ing:"pollo",        t:30,  porcs:"4",   nota:"Frijoles + pollo = proteína completa ideal para recuperación muscular.",               ing_lista:"frijoles negros, pechuga desmenuzada, cebolla, ajo, jitomate, comino",                                prep:"Saltea sofrito • agrega frijoles/pollo/caldo • cuece 20 min"},
+  {n:25, cat:"Ganar Musculo y Proteina",    nom:"Atún con Quinoa y Aguacate",          ben:"Proteína completa vegetal • Omega 3",                ing:"pescado",      t:20,  porcs:"2",   nota:"La quinoa es el único cereal con proteína completa igual que la carne.",               ing_lista:"atún en agua, quinoa cocida, aguacate, pepino, limón, cilantro",                                      prep:"Cocina quinoa • mezcla con atún • agrega aguacate/pepino • adereza"},
+  {n:26, cat:"Ganar Musculo y Proteina",    nom:"Omelette de Claras con Hongos",       ben:"Proteína pura • Sin grasa • Vitamina B",             ing:"huevo",        t:12,  porcs:"1",   nota:"Las claras tienen la proteína más biodisponible del mundo.",                           ing_lista:"claras de huevo, huevo entero, hongos surtidos, cebolla, espinacas",                                  prep:"Saltea hongos/cebolla • vierte claras batidas • tapa 4 min a fuego bajo"},
+  {n:27, cat:"Ganar Musculo y Proteina",    nom:"Pavo Molido con Camote",              ben:"Proteína magra • Carbos complejos • Recuperación",  ing:"pavo",         t:35,  porcs:"3",   nota:"El camote aporta carbohidratos de absorción lenta que alimentan el músculo 3-4 horas.",ing_lista:"pavo molido, camotes, cebolla, ajo, paprika ahumada, caldo verduras",                                 prep:"Cuece camotes vapor • saltea pavo con especias • mezcla y sirve"},
+  {n:28, cat:"Ganar Musculo y Proteina",    nom:"Salmón con Espárragos al Vapor",      ben:"Omega 3 • Vitamina D • Proteína completa",           ing:"pescado",      t:25,  porcs:"2",   nota:"El salmón al vapor conserva el 100% de sus omega-3.",                                  ing_lista:"filetes salmón, espárragos, limón, ajo, eneldo seco, agua",                                          prep:"Coloca espárragos en fondo • salmón encima • sazona • vapor 15 min"},
+  {n:29, cat:"Ganar Musculo y Proteina",    nom:"Guiso de Garbanzos con Espinacas",    ben:"Proteína vegetal • Hierro • Calcio",                 ing:"legumbres",    t:20,  porcs:"3",   nota:"La vitamina C del jitomate triplica la absorción del hierro.",                         ing_lista:"garbanzos, espinacas, cebolla, ajo, jitomates, cúrcuma, caldo",                                      prep:"Saltea sofrito con cúrcuma • agrega garbanzos/caldo • espinacas 3 min"},
+  {n:30, cat:"Ganar Musculo y Proteina",    nom:"Milanesa de Pollo en Olla",           ben:"Alta proteína • Crujiente sin freír • Sin grasa",   ing:"pollo",        t:30,  porcs:"2",   nota:"La avena como empanizador agrega fibra beta-glucano que regula el colesterol.",        ing_lista:"pechugas aplanadas, avena molida, claras de huevo, ajo en polvo, paprika",                            prep:"Empaniza con avena • sella en olla sin aceite 6 min/lado tapado"},
+  {n:31, cat:"Ganar Musculo y Proteina",    nom:"Sopa de Lentejas con Chorizo Pavo",   ben:"Hierro • Zinc • Vitaminas B",                        ing:"pavo",         t:35,  porcs:"4",   nota:"Hierro de lentejas + vitamina C del jitomate = absorción máxima.",                     ing_lista:"lentejas verdes, chorizo de pavo, papas, cebolla, ajo, jitomates, comino",                           prep:"Saltea chorizo • agrega sofrito/lentejas/papas/agua • cuece 30 min"},
+  {n:32, cat:"Ganar Musculo y Proteina",    nom:"Bowl de Quinoa Pollo y Verduras",     ben:"Proteína doble • Fibra • Completo nutricional",      ing:"pollo",        t:25,  porcs:"2",   nota:"Este bowl tiene todos los macronutrientes en una sola preparación.",                   ing_lista:"quinoa, pechuga en cubos, pimiento rojo, zucchini, maíz, limón, comino",                             prep:"Cocina quinoa • sella pollo • saltea vegetales • mezcla y adereza"},
+  {n:33, cat:"Ganar Musculo y Proteina",    nom:"Res con Ejotes y Zanahoria",          ben:"Hierro hemo • Vitamina A • Zinc",                    ing:"res",          t:30,  porcs:"3",   nota:"La zanahoria aporta vitamina A que protege las articulaciones.",                       ing_lista:"bistec en tiras, ejotes, zanahorias, cebolla, ajo, soya baja sodio, tomillo",                        prep:"Sella res a fuego alto • saltea verduras • regresa carne • mezcla"},
+  {n:34, cat:"Ganar Musculo y Proteina",    nom:"Tortilla Española de Claras",         ben:"Proteína pura • Saciante • Sin grasa",               ing:"huevo",        t:20,  porcs:"2",   nota:"Esta versión tiene 40% más proteína y 60% menos grasa que la original.",              ing_lista:"claras de huevo, huevos enteros, papas en rodajas, cebolla, perejil",                                 prep:"Cuece papas/cebolla sin aceite • vierte claras • tapa 8 min • voltea"},
+  {n:35, cat:"Ganar Musculo y Proteina",    nom:"Caldo Pollo con Pasta de Legumbres",  ben:"Colágeno • Proteína • Recuperación articular",      ing:"pollo",        t:40,  porcs:"4",   nota:"El colágeno del caldo de hueso repara las micro-rupturas musculares del ejercicio.",   ing_lista:"pollo partido, zanahorias, apio, cebolla, ajo, pasta de lentejas",                                   prep:"Cuece pollo con verduras 30 min • deshuesa • regresa caldo • agrega pasta"},
+  {n:36, cat:"Ganar Musculo y Proteina",    nom:"Ensalada Atún y Frijoles Blancos",    ben:"Proteína doble • Fibra • Omega 3",                   ing:"pescado",      t:10,  porcs:"2",   nota:"Atún + frijoles blancos = 28 gramos de proteína con índice glucémico muy bajo.",      ing_lista:"atún en agua, frijoles blancos cocidos, pimiento rojo, cebolla morada, limón",                       prep:"Mezcla atún/frijoles • agrega pimiento/cebolla • adereza con limón"},
+  {n:37, cat:"Ganar Musculo y Proteina",    nom:"Pollo en Mole Verde Ligero",          ben:"Alta proteína • Antioxidantes • Zinc",               ing:"pollo",        t:40,  porcs:"4",   nota:"Las pepitas son la fuente vegetal más rica en zinc, clave para la síntesis muscular.", ing_lista:"muslos pollo, pepitas, tomatillos, espinacas, chile serrano, caldo pollo",                           prep:"Cuece pollo en caldo • tuesta pepitas • licúa mole verde • guisa"},
+  {n:38, cat:"Ganar Musculo y Proteina",    nom:"Sardinas con Quinoa y Limón",         ben:"Omega 3 • Calcio • Proteína completa",               ing:"pescado",      t:15,  porcs:"2",   nota:"Las sardinas enteras tienen 3 veces más calcio que la leche.",                        ing_lista:"sardinas en agua, quinoa cocida, pepino, limón, perejil, aceitunas",                                  prep:"Mezcla quinoa tibia con sardinas • agrega pepino/aceitunas • adereza"},
+  {n:39, cat:"Ganar Musculo y Proteina",    nom:"Pollo con Espinacas y Champiñones",   ben:"Hierro • Vitamina D • 28g proteína",                 ing:"pollo",        t:25,  porcs:"2",   nota:"Champiñones + espinacas son ricos en glutamato que reduce el dolor muscular.",        ing_lista:"pechugas en tiras, champiñones, espinacas, cebolla, ajo, caldo, romero",                             prep:"Sella pollo • agrega champiñones/caldo/hierbas • añade espinacas 3 min"},
+  {n:40, cat:"Ganar Musculo y Proteina",    nom:"Res con Camote y Brócoli",            ben:"Hierro • Carbos complejos • Recuperación",           ing:"res",          t:35,  porcs:"3",   nota:"Esta combinación tiene el ratio perfecto de macronutrientes para ganar masa.",        ing_lista:"bistec en cubos, camotes, brócoli, cebolla, ajo, soya, paprika",                                     prep:"Cuece camotes vapor • sella res fuego alto • agrega brócoli • mezcla"},
+  {n:41, cat:"Energia y Vitalidad",         nom:"Avena con Frutos del Bosque",         ben:"Antioxidantes • Energía sostenida • Serotonina",     ing:"vegetariano", t:10,  porcs:"1",   nota:"Los arándanos tienen el mayor índice ORAC de antioxidantes del mundo.",               ing_lista:"avena integral, leche de avena, moras y arándanos, nueces, miel, canela",                             prep:"Calienta leche • cocina avena 5 min • sirve con frutos/nueces/miel"},
+  {n:42, cat:"Energia y Vitalidad",         nom:"Pollo al Azafrán con Arroz Integral", ben:"Hierro • Serotonina natural • Energía celular",      ing:"pollo",        t:40,  porcs:"3",   nota:"El azafrán aumenta la serotonina mejorando el estado de ánimo y la energía mental.",  ing_lista:"muslos pollo, arroz integral, azafrán, pimiento rojo, cebolla, ajo, caldo",                          prep:"Sella pollo • saltea sofrito/arroz • agrega caldo/azafrán • 30 min tapado"},
+  {n:43, cat:"Energia y Vitalidad",         nom:"Sopa de Lentejas Anti-Fatiga",        ben:"Hierro • Zinc • Vitaminas B • Anti-fatiga",          ing:"pavo",         t:35,  porcs:"4",   nota:"El hierro de las lentejas es el principal combatiente de la fatiga crónica en mujeres.",ing_lista:"lentejas verdes, chorizo de pavo, papas, cebolla, ajo, jitomates, comino",                           prep:"Saltea chorizo • sofrito completo • lentejas/papas/agua • 30 min"},
+  {n:44, cat:"Energia y Vitalidad",         nom:"Arroz Integral con Vegetales",        ben:"Carbohidratos complejos • Fibra • Vitaminas",        ing:"vegetariano", t:30,  porcs:"3",   nota:"El arroz integral tiene el doble de fibra y magnesio que el blanco.",                  ing_lista:"arroz integral, pimientos de colores, zucchini, zanahoria, ajo, soya, sésamo",                       prep:"Cocina arroz • saltea vegetales en misma olla • mezcla con soya"},
+  {n:45, cat:"Energia y Vitalidad",         nom:"Caldo de Hueso Casero",               ben:"Colágeno • Minerales • Gut health",                  ing:"res",          t:180, porcs:"6",   nota:"El vinagre de manzana extrae minerales de los huesos: calcio, magnesio, fósforo.",    ing_lista:"huesos de res, zanahorias, apio, cebolla, ajo, vinagre de manzana, hierbas",                         prep:"Todo en olla con agua fría + vinagre • hierve • fuego mínimo 3 horas"},
+  {n:46, cat:"Energia y Vitalidad",         nom:"Pasta Legumbres con Pesto Albahaca",  ben:"Proteína vegetal + carbohidratos • Energía completa",ing:"vegetariano", t:20,  porcs:"2",   nota:"La levadura nutricional aporta vitaminas B1 B2 B3 B6 B12 para energía celular.",       ing_lista:"pasta de lentejas, albahaca fresca, nueces, ajo, limón, levadura nutricional",                       prep:"Cuece pasta • licúa pesto con levadura • mezcla y sirve inmediato"},
+  {n:47, cat:"Energia y Vitalidad",         nom:"Guiso de Papas con Romero",           ben:"Potasio • Vitamina B6 • Energía rápida",             ing:"vegetariano", t:25,  porcs:"3",   nota:"Las papas son la fuente más biodisponible de potasio, mineral clave para la energía.", ing_lista:"papas en cubos, cebolla, ajo, romero fresco, paprika, caldo verduras",                                prep:"Saltea cebolla/ajo • dora papas • agrega romero/caldo • 15 min tapado"},
+  {n:48, cat:"Energia y Vitalidad",         nom:"Salmón con Quinoa y Espinacas",       ben:"Omega 3 • Proteína completa • Hierro",               ing:"pescado",      t:25,  porcs:"2",   nota:"Omega 3 + hierro + proteína completa. El trío perfecto para energía todo el día.",    ing_lista:"filetes salmón, quinoa, espinacas, limón, ajo, eneldo",                                              prep:"Cocina quinoa • sella salmón 4 min/lado • saltea espinacas • sirve"},
+  {n:49, cat:"Energia y Vitalidad",         nom:"Bowl de Camote y Frijoles Negros",    ben:"Energía larga duración • Fibra • Hierro vegetal",    ing:"legumbres",    t:25,  porcs:"2",   nota:"El camote tiene índice glucémico de 54, muy menor que el arroz. Energía sin picos.",  ing_lista:"camotes medianos, frijoles negros cocidos, aguacate, limón, comino, cilantro",                       prep:"Cuece camotes vapor • parte a la mitad • rellena con frijoles calientes"},
+  {n:50, cat:"Energia y Vitalidad",         nom:"Té Verde con Jengibre y Limón",       ben:"L-teanina • Cafeína natural • Claridad mental",      ing:"vegetariano", t:5,   porcs:"2",   nota:"El agua hirviendo destruye la L-teanina del té verde. A 80 grados se conserva completa.",ing_lista:"té verde, jengibre fresco, limón, miel, agua a 80 grados",                                          prep:"Calienta agua a 80°C • jengibre 2 min • té 3 min • agrega limón/miel"},
+  {n:51, cat:"Energia y Vitalidad",         nom:"Pollo con Mango y Jengibre",          ben:"Vitamina C • Enzimas digestivas • Energía tropical",ing:"pollo",        t:25,  porcs:"2",   nota:"La bromelina del mango actúa como enzima digestiva que descompone la proteína del pollo.",ing_lista:"pechugas en cubos, mango maduro, jengibre rallado, cebolla morada, limón",                          prep:"Sella pollo • saltea jengibre/cebolla • incorpora mango 2 min • adereza"},
+  {n:52, cat:"Energia y Vitalidad",         nom:"Sopa Espinacas con Huevo Pochado",    ben:"Hierro • Folato • Energía cerebral",                 ing:"huevo",        t:15,  porcs:"2",   nota:"El folato de las espinacas es esencial para producir glóbulos rojos que oxigenan el cerebro.",ing_lista:"espinacas, huevos, cebolla, ajo, caldo verduras, nuez moscada, vinagre",                          prep:"Saltea cebolla/ajo • agrega caldo/espinacas • pocha huevos 3-4 min"},
+  {n:53, cat:"Energia y Vitalidad",         nom:"Avena Salada con Huevo y Aguacate",   ben:"Proteína completa • Grasas buenas • Energía mañana",ing:"huevo",        t:12,  porcs:"1",   nota:"La avena salada con huevo y aguacate tiene el ratio macronutrimental perfecto.",       ing_lista:"avena, caldo de verduras, huevos pochados, aguacate, chile en polvo, limón",                         prep:"Cocina avena con caldo • sirve con huevos pochados y aguacate encima"},
+  {n:54, cat:"Energia y Vitalidad",         nom:"Pavo con Espinacas y Camote",         ben:"Triptófano • Vitamina B6 • Energía y bienestar",    ing:"pavo",         t:35,  porcs:"3",   nota:"El pavo es la fuente más rica en triptófano, precursor de serotonina y bienestar.",   ing_lista:"pavo molido, espinacas, camotes, cebolla, ajo, cúrcuma",                                             prep:"Cuece camotes vapor • saltea pavo/espinacas/cúrcuma • sirve sobre camote"},
+  {n:55, cat:"Energia y Vitalidad",         nom:"Caldo Energizante de Miso",           ben:"Probióticos • Minerales • Energía inmediata",        ing:"vegetariano", t:15,  porcs:"2",   nota:"El miso mejora la absorción de minerales energizantes como magnesio y zinc.",          ing_lista:"pasta de miso, caldo verduras, tofu, alga wakame, cebollín, jengibre fresco",                        prep:"Calienta caldo SIN hervir • disuelve miso en frío • mezcla • sirve"},
+  {n:56, cat:"Salud Digestiva",             nom:"Sopa de Miso con Verduras",           ben:"Probióticos • Gut health • Microbioma",              ing:"vegetariano", t:15,  porcs:"2",   nota:"NUNCA hiervas el miso: destruye los probióticos. El acero permite control preciso.",   ing_lista:"pasta de miso, caldo verduras, tofu, alga wakame, cebollín, jengibre",                               prep:"Calienta caldo SIN hervir • disuelve miso aparte • mezcla final • nunca hiervas"},
+  {n:57, cat:"Salud Digestiva",             nom:"Compota de Manzana con Canela",       ben:"Pectina • Prebiótico natural • Intestino feliz",     ing:"vegetariano", t:20,  porcs:"4",   nota:"La pectina de la manzana cocida es el mejor prebiótico natural.",                     ing_lista:"manzanas peladas, canela, agua, limón, miel opcional",                                                prep:"Manzanas con agua/limón/canela • 15 min tapado fuego bajo • aplasta"},
+  {n:58, cat:"Salud Digestiva",             nom:"Crema de Zanahoria con Jengibre",     ben:"Beta-caroteno • Antiinflamatorio digestivo",         ing:"vegetariano", t:25,  porcs:"4",   nota:"El jengibre reduce la inflamación intestinal y acelera el vaciamiento gástrico.",      ing_lista:"zanahorias, jengibre fresco, cebolla, ajo, leche de coco light, caldo",                              prep:"Saltea aromáticos • cuece zanahoria/jengibre 20 min • licúa con coco"},
+  {n:59, cat:"Salud Digestiva",             nom:"Arroz con Leche de Coco y Papaya",    ben:"Papaína digestiva • Fácil digestión",                ing:"vegetariano", t:25,  porcs:"3",   nota:"La papaína de la papaya descompone proteínas. Perfecta post comida abundante.",        ing_lista:"arroz blanco, leche de coco, papaya fresca, canela, vainilla, miel",                                 prep:"Cocina arroz con leche coco • agrega canela/vainilla • sirve con papaya"},
+  {n:60, cat:"Salud Digestiva",             nom:"Caldo Depurativo con Kuzu",           ben:"Antiácido natural • Regenera mucosa gástrica",       ing:"vegetariano", t:15,  porcs:"2",   nota:"El kuzu es antiácido natural de la medicina oriental. Regula el pH del estómago.",    ing_lista:"kuzu o fécula de maíz, caldo verduras, umeboshi o limón, jengibre rallado",                         prep:"Disuelve kuzu en frío • calienta caldo • agrega kuzu revolviendo • espesa"},
+  {n:61, cat:"Salud Digestiva",             nom:"Pozole Verde Ligero",                 ben:"Fibra de maíz • Minerales • Microbioma",             ing:"pollo",        t:40,  porcs:"4",   nota:"El maíz nixtamalizado del pozole tiene fibra que alimenta las bacterias beneficiosas.", ing_lista:"maíz pozolero, pechuga pollo, tomatillos, espinacas, pepitas, caldo pollo",                          prep:"Cuece pollo en caldo • licúa salsa verde • agrega maíz/salsa/pollo"},
+  {n:62, cat:"Salud Digestiva",             nom:"Crema de Camote con Especias",        ben:"Beta-caroteno • Fibra suave • Antiinflamatorio",     ing:"vegetariano", t:30,  porcs:"3",   nota:"La pimienta negra aumenta 2000% la absorción de curcumina de la cúrcuma.",            ing_lista:"camotes, cúrcuma, jengibre polvo, pimienta negra, leche de coco, caldo",                             prep:"Cuece camotes • licúa con coco/especias • regresa con pimienta y cúrcuma"},
+  {n:63, cat:"Salud Digestiva",             nom:"Sopa de Zanahoria y Naranja",         ben:"Vitamina C • Beta-caroteno • Enzimas digestivas",    ing:"vegetariano", t:20,  porcs:"3",   nota:"La naranja añadida al final preserva vitamina C que potencia la absorción del hierro.", ing_lista:"zanahorias, naranja, cebolla, ajo, caldo verduras, jengibre, canela",                                prep:"Saltea aromáticos • cuece zanahoria/caldo • licúa con naranja y jengibre"},
+  {n:64, cat:"Salud Digestiva",             nom:"Ensalada Tibial Betabel y Kéfir",     ben:"Probióticos • Betalaínas • Simbiótico",              ing:"vegetariano", t:35,  porcs:"2",   nota:"Kéfir + betabel = probiótico + prebiótico juntos. La combinación más poderosa.",       ing_lista:"betabeles, kéfir natural sin azúcar, arúgula, nueces picadas, limón",                                prep:"Cuece betabeles 30 min • corta en cubos • mezcla con arúgula • aderezo kéfir"},
+  {n:65, cat:"Salud Digestiva",             nom:"Caldo de Verduras con Algas",         ben:"Yodo • Minerales oceánicos • Tiroides saludable",    ing:"vegetariano", t:20,  porcs:"4",   nota:"Las algas contienen 12 minerales esenciales. El yodo es vital para la tiroides.",     ing_lista:"alga kombu, zanahoria, apio, cebolla, alga wakame, agua, sal de mar",                                prep:"Todo en olla con agua fría • hierve • fuego bajo 15 min • cuela"},
+  {n:66, cat:"Salud Digestiva",             nom:"Arroz Integral con Manzana y Canela", ben:"Prebiótico • Fibra soluble • Intestino regulado",    ing:"vegetariano", t:30,  porcs:"3",   nota:"Arroz integral + pectina de manzana = prebiótico que alimenta bifidobacterias 8h.",   ing_lista:"arroz integral, manzanas, canela, cardamomo, leche almendra, miel, vainilla",                        prep:"Cocina arroz con leche almendra • agrega manzana/canela/cardamomo • 25 min"},
+  {n:67, cat:"Salud Digestiva",             nom:"Sopa Pollo con Jengibre y Cúrcuma",   ben:"Antiinflamatorio intestinal • Colágeno • Digestivo",ing:"pollo",        t:35,  porcs:"4",   nota:"El colágeno del caldo de pollo repara la mucosa intestinal.",                          ing_lista:"pechugas, zanahorias, apio, cúrcuma, jengibre rallado, caldo",                                       prep:"Cuece pollo con verduras 25 min • desmenúzalo • agrega cúrcuma/jengibre"},
+  {n:68, cat:"Salud Digestiva",             nom:"Puré de Papaya con Linaza",           ben:"Papaína • Omega 3 vegetal • Tránsito intestinal",    ing:"vegetariano", t:10,  porcs:"2",   nota:"La linaza molida absorbe 10 veces su peso en agua, regulando el tránsito.",           ing_lista:"papaya madura, linaza molida, limón, miel, agua",                                                     prep:"Licúa papaya con agua/limón • calienta suave • agrega linaza/miel • sirve tibio"},
+  {n:69, cat:"Antiinflamatorio y Minerales",nom:"Golden Milk Leche Dorada",            ben:"Curcumina • Antiinflamatorio potente • Sueño",       ing:"vegetariano", t:10,  porcs:"2",   nota:"Tomado en la noche actúa mientras duermes. Reduce IL-6 y TNF-alfa inflamatorios.",     ing_lista:"leche almendra, cúrcuma, canela, jengibre polvo, pimienta negra, miel",                              prep:"Calienta leche a fuego bajo • agrega especias • revuelve 5 min • miel al final"},
+  {n:70, cat:"Antiinflamatorio y Minerales",nom:"Sardinas con Jitomate y Aceitunas",   ben:"Omega 3 • Calcio con espinas • Antiinflamatorio",    ing:"pescado",      t:15,  porcs:"2",   nota:"Las sardinas enteras tienen 3 veces más calcio que la leche.",                        ing_lista:"sardinas en agua, jitomates, aceitunas, cebolla morada, limón, alcaparras",                          prep:"Saltea cebolla/jitomate • agrega sardinas/aceitunas/alcaparras • 5 min"},
+  {n:71, cat:"Antiinflamatorio y Minerales",nom:"Sopa de Cebolla Caramelizada",        ben:"Quercetina • Antioxidante • Antiinflamatorio",       ing:"vegetariano", t:45,  porcs:"4",   nota:"La quercetina de la cebolla caramelizada es uno de los antiinflamatorios más potentes.",ing_lista:"cebollas grandes en julianas, caldo res bajo sodio, ajo, tomillo",                                   prep:"Cebolla en olla a fuego muy bajo 30-40 min hasta caramelizar • agrega caldo"},
+  {n:72, cat:"Antiinflamatorio y Minerales",nom:"Ensalada Betabel y Naranja Tibia",    ben:"Nitrato natural • Betalaínas • Circulación",         ing:"vegetariano", t:35,  porcs:"2",   nota:"El betabel aumenta el óxido nítrico mejorando la circulación naturalmente.",           ing_lista:"betabeles, naranjas en gajos, nueces, arúgula, vinagre balsámico",                                   prep:"Cuece betabeles 30 min • corta en cubos • mezcla con naranja/arúgula/nueces"},
+  {n:73, cat:"Antiinflamatorio y Minerales",nom:"Guiso de Espinacas con Almendras",    ben:"Magnesio • Calcio • Vitamina K",                     ing:"vegetariano", t:15,  porcs:"2",   nota:"Las espinacas son la fuente vegetal más rica en magnesio. 7/10 mujeres lo tienen bajo.",ing_lista:"espinacas baby, almendras tostadas, ajo, limón, nuez moscada",                                       prep:"Saltea ajo sin aceite • agrega espinacas 3 min • limón y nuez moscada • almendras"},
+  {n:74, cat:"Antiinflamatorio y Minerales",nom:"Té de Jengibre Limón y Miel",         ben:"Gingeroles • Antiinflamatorio • Inmunidad",          ing:"vegetariano", t:10,  porcs:"2",   nota:"La miel no debe calentarse más de 60°. Añadida al final conserva todas sus enzimas.",  ing_lista:"jengibre fresco, limón, miel cruda, cayena, agua",                                                   prep:"Hierve agua • jengibre 5 min • cuela • limón • agrega miel cuando baje a 60°"},
+  {n:75, cat:"Antiinflamatorio y Minerales",nom:"Lentejas Negras y Verduras Crucíferas",ben:"Sulforafano • Hierro • Anticanceroso",              ing:"legumbres",    t:35,  porcs:"4",   nota:"El sulforafano de brócoli y coliflor es el compuesto anticanceroso más estudiado.",   ing_lista:"lentejas negras beluga, coliflor, brócoli, cebolla, ajo, cúrcuma, comino",                           prep:"Saltea aromáticos • lentejas/caldo 20 min • agrega coliflor/brócoli 10 min"},
+  {n:76, cat:"Antiinflamatorio y Minerales",nom:"Salmón con Cúrcuma y Limón",          ben:"Omega 3 + curcumina • Anti-dolor articular",         ing:"pescado",      t:20,  porcs:"2",   nota:"Omega-3 + curcumina = combinación antiinflamatoria más poderosa para articulaciones.", ing_lista:"filetes salmón, cúrcuma, jengibre rallado, limón, pimienta negra, eneldo",                           prep:"Marina salmón con cúrcuma/jengibre/limón 10 min • sella 4 min/lado"},
+  {n:77, cat:"Antiinflamatorio y Minerales",nom:"Sopa de Betabel con Coco",            ben:"Betalaínas • Triglicéridos MCT • Energía y antiox",  ing:"vegetariano", t:30,  porcs:"3",   nota:"Las betalaínas del betabel son pigmentos antiinflamatorios únicos en la naturaleza.",   ing_lista:"betabeles, leche de coco, cebolla, ajo, caldo verduras, limón, jengibre",                            prep:"Cuece betabeles • licúa con caldo/sofrito • regresa con coco/jengibre"},
+  {n:78, cat:"Antiinflamatorio y Minerales",nom:"Guiso de Frijoles con Epazote",       ben:"Hierro vegetal • Antiflatulento • Magnesio",         ing:"legumbres",    t:25,  porcs:"4",   nota:"El epazote es carminativo natural. Elimina gases e inflamación de los frijoles.",      ing_lista:"frijoles negros cocidos, epazote fresco, cebolla, ajo, chile pasilla asado",                         prep:"Saltea cebolla/ajo • frijoles/caldo • epazote/chile • fuego bajo 15 min"},
+  {n:79, cat:"Antiinflamatorio y Minerales",nom:"Caldo de Cúrcuma y Pimienta",         ben:"Curcumina biodisponible • Antiinflamatorio sistémico",ing:"vegetariano",t:20,  porcs:"4",   nota:"Sin pimienta negra absorbes solo el 3% de la curcumina. Con pimienta, el 2000%.",     ing_lista:"zanahorias, apio, cebolla, ajo, cúrcuma, pimienta negra molida, agua",                               prep:"Todo en olla con agua fría • hierve 15 min • agrega cúrcuma/pimienta al final"},
+  {n:80, cat:"Antiinflamatorio y Minerales",nom:"Avena con Chía y Cúrcuma",            ben:"Omega 3 • Curcumina • Anti-dolor • Fibra",           ing:"vegetariano", t:10,  porcs:"1",   nota:"Este desayuno tiene propiedades antiinflamatorias activas desde la primera cucharada.", ing_lista:"avena, leche almendra, chía, cúrcuma, pimienta negra, miel, canela",                                 prep:"Calienta leche • avena con cúrcuma/pimienta 5 min • sirve con chía/miel"},
+  {n:81, cat:"Para Hipertensos",            nom:"Sopa de Betabel Antihipertensiva",     ben:"Nitrato • Reduce presión arterial",                  ing:"vegetariano", t:35,  porcs:"4",   nota:"500ml de betabel reducen la presión 10-12 mmHg en 1 hora según estudios clínicos.",    ing_lista:"betabeles, manzana verde, cebolla, ajo, caldo bajo sodio, jengibre fresco",                          prep:"Cuece betabeles/manzana • saltea sofrito • licúa todo con caldo/jengibre"},
+  {n:82, cat:"Para Hipertensos",            nom:"Salmón al Vapor Sin Sodio",            ben:"Omega 3 • Potasio • Sin sodio • Cardioprotector",    ing:"pescado",      t:20,  porcs:"2",   nota:"El omega-3 del salmón relaja las paredes arteriales. El limón reemplaza la sal.",     ing_lista:"filetes salmón, limón, ajo en polvo, cebolla en polvo, eneldo, pimienta SIN sal",                    prep:"Marina con limón/especias • vapor 15 min • el limón reemplaza la sal"},
+  {n:83, cat:"Para Hipertensos",            nom:"Crema Brócoli con Ajo Rostizado",      ben:"Alicina vasodilatadora • Sin sodio • Cardioprotector",ing:"vegetariano",t:30,  porcs:"4",   nota:"El ajo rostizado libera alicina que reduce la presión sistólica hasta 9 mmHg.",       ing_lista:"brócoli, cabeza entera ajo, cebolla, caldo verduras SIN sodio, leche avena",                         prep:"Rostiza ajo entero tapado 20 min • brócoli/caldo 15 min • exprime ajo • licúa"},
+  {n:84, cat:"Para Hipertensos",            nom:"Avena con Plátano y Linaza",           ben:"Potasio • Magnesio • Fibra antihipertensiva",        ing:"vegetariano", t:10,  porcs:"1",   nota:"Plátano + linaza + avena = triple golpe de potasio, magnesio y fibra.",               ing_lista:"avena, leche avena sin azúcar, plátano maduro, linaza molida, canela SIN sal",                       prep:"Calienta leche • avena 5 min • sirve con plátano/linaza/canela"},
+  {n:85, cat:"Para Hipertensos",            nom:"Pollo con Hierbas Sin Sal",            ben:"Proteína magra • Sin sodio • Vasodilatador natural", ing:"pollo",        t:30,  porcs:"2",   nota:"Las hierbas aromáticas contienen fitoquímicos vasodilatadores que reemplazan la sal.", ing_lista:"pechugas pollo, romero, tomillo, orégano, jugo naranja, pimienta SIN sal",                           prep:"Marina con hierbas/naranja/pimienta 20 min • sella • 15 min tapado"},
+  {n:86, cat:"Para Hipertensos",            nom:"Guiso DASH Espinacas y Frijoles",      ben:"Dieta DASH • Potasio • Magnesio • Fibra",            ing:"legumbres",    t:20,  porcs:"3",   nota:"La dieta DASH se basa en este tipo de platos: legumbres + hojas verdes + ajo.",       ing_lista:"espinacas, frijoles negros, ajo, jitomate, orégano, comino, caldo SIN sodio",                        prep:"Saltea ajo/jitomate • frijoles/caldo • espinacas 3 min • SIN sal"},
+  {n:87, cat:"Para Hipertensos",            nom:"Caldo DASH de Verduras",               ben:"Potasio alto • Sin sodio • Cardioprotector",         ing:"vegetariano", t:40,  porcs:"6",   nota:"El caldo base DASH. Congelarlo en cubos te da la base perfecta sin sodio siempre.",    ing_lista:"zanahorias, apio, cebolla, poro, ajo, perejil, tomillo, laurel, agua SIN sal",                       prep:"Todo en olla con agua fría • hierve • fuego bajo 30 min • cuela"},
+  {n:88, cat:"Para Hipertensos",            nom:"Ensalada Aguacate Tomate Pepino",      ben:"Potasio • Grasas buenas • Sin sodio",                ing:"vegetariano", t:10,  porcs:"2",   nota:"Un aguacate tiene más potasio que un plátano. Contrarresta directamente el sodio.",    ing_lista:"aguacate maduro, tomates, pepino, cebolla morada, limón, orégano SIN sal",                           prep:"Corta en cubos • mezcla • aderezo generoso de limón y orégano"},
+  {n:89, cat:"Para Hipertensos",            nom:"Pescado Vapor con Vegetales",          ben:"Omega 3 • Sin sodio • Cardioprotector total",        ing:"pescado",      t:25,  porcs:"2",   nota:"El pescado al vapor con limón generoso tiene la misma palatabilidad que con sal.",     ing_lista:"filetes robalo o tilapia, brócoli, zanahoria, limón, ajo en polvo, pimienta SIN sal",                prep:"Agua en olla • verduras fondo • pescado encima • vapor 15-18 min"},
+  {n:90, cat:"Para Hipertensos",            nom:"Puré de Camote Sin Sal",               ben:"Potasio máximo • Fibra • Magnesio",                  ing:"vegetariano", t:25,  porcs:"3",   nota:"El camote tiene 542mg de potasio por porción. El 12% del requerimiento diario.",       ing_lista:"camotes, leche avena, canela, nuez moscada, miel SIN sal ni mantequilla",                            prep:"Cuece camotes vapor 20 min • machaca • leche/canela/nuez moscada • miel"},
+  {n:91, cat:"Para Hipertensos",            nom:"Sopa Lentejas Sin Sal con Limón",      ben:"Hierro • Magnesio • Fibra • Sin sodio",              ing:"legumbres",    t:30,  porcs:"4",   nota:"El limón exprimido al servir realza los sabores haciendo innecesaria la sal.",         ing_lista:"lentejas verdes, zanahorias, cebolla, ajo, limón grande, comino, cúrcuma, caldo SIN sodio",          prep:"Saltea cebolla/ajo • lentejas/zanahoria/caldo/especias SIN sal • limón al servir"},
+  {n:92, cat:"Para Hipertensos",            nom:"Pavo Vapor con Verduras de Colores",   ben:"Proteína magra • Sin sodio • Vitaminas completas",  ing:"pavo",         t:35,  porcs:"3",   nota:"Los pimientos de colores tienen 300mg de vitamina C cada uno. Potencian vasodilatación.",ing_lista:"pechuga pavo, pimiento rojo y amarillo, zucchini, naranja, orégano, pimienta",                       prep:"Marina pavo con naranja/orégano • verduras y pavo al vapor 25 min"},
+  {n:93, cat:"Para Hipertensos",            nom:"Infusión de Jamaica y Jengibre",       ben:"Ácido hibisco • Reduce presión sistólica • Diurético",ing:"vegetariano",t:10,  porcs:"4",   nota:"El ácido hibisco de la jamaica reduce la presión sistólica hasta 7 mmHg.",            ing_lista:"flor de jamaica seca, jengibre fresco, agua, stevia o miel, limón opcional",                         prep:"Hierve agua • agrega jamaica/jengibre • apaga • 8 min tapado • cuela/endulza"},
+  {n:94, cat:"Dieta Mediterranea",          nom:"Hummus Clásico de Garbanzos",          ben:"Proteína vegetal • Tahini • Hierro • Calcio",        ing:"legumbres",    t:15,  porcs:"6",   nota:"El hummus tiene más proteína y fibra por caloría que cualquier producto lácteo.",     ing_lista:"garbanzos cocidos, tahini, limón, ajo, sal, comino, paprika, aceite de oliva",                       prep:"Licúa garbanzos/tahini/limón/ajo • agua fría de a poco • sazona • aceite oliva"},
+  {n:95, cat:"Dieta Mediterranea",          nom:"Salmón con Aceitunas y Alcaparras",    ben:"Omega 3 • Antioxidantes • Corazón sano",             ing:"pescado",      t:25,  porcs:"2",   nota:"Las aceitunas kalamata tienen 3 veces más antioxidantes que las verdes.",              ing_lista:"filetes salmón, aceitunas kalamata, alcaparras, jitomates cherry, limón, orégano, aceite oliva",      prep:"Salmón en olla • cubre con aceitunas/alcaparras/jitomates • tapa 15-18 min"},
+  {n:96, cat:"Dieta Mediterranea",          nom:"Pollo a la Griega con Limón",          ben:"Proteína • Vitamina C • Antiinflamatorio",           ing:"pollo",        t:35,  porcs:"3",   nota:"El orégano griego tiene 3 veces más antioxidantes que el común.",                     ing_lista:"pechugas, limón, ajo, orégano griego seco, romero, aceite de oliva",                                 prep:"Marina 20 min con limón/ajo/orégano • sella 4 min/lado • 20 min tapado"},
+  {n:97, cat:"Dieta Mediterranea",          nom:"Tabbouleh de Quinoa",                  ben:"Proteína completa • Vitamina C • Folato",            ing:"vegetariano", t:20,  porcs:"4",   nota:"El perejil tiene más vitamina C que la naranja.",                                     ing_lista:"quinoa cocida, perejil fresco, menta fresca, jitomates, pepino, limón, aceite oliva",                prep:"Cocina quinoa • enfría • pica todas las hierbas finamente • mezcla • refrigera"},
+  {n:98, cat:"Dieta Mediterranea",          nom:"Lentejas con Espinacas Estilo Libanés",ben:"Hierro • Proteína vegetal • Vitamina K",             ing:"legumbres",    t:35,  porcs:"4",   nota:"Este platillo libanés es el más nutritivo de la dieta mediterránea oriental.",        ing_lista:"lentejas verdes, espinacas, cebolla grande, ajo, limón, comino, cúrcuma, aceite oliva",               prep:"Dora bien la cebolla • comino/ajo/lentejas/agua • espinacas 3 min • limón/aceite"},
+  {n:99, cat:"Dieta Mediterranea",          nom:"Bacalao con Tomate y Aceitunas",       ben:"Proteína magra • Omega 3 • Bajo en grasa",           ing:"pescado",      t:30,  porcs:"3",   nota:"Esta receta mediterránea tiene más de 2000 años de tradición culinaria.",             ing_lista:"filete bacalao o robalo, jitomates guaje, aceitunas, cebolla, ajo, alcaparras, orégano, aceite oliva",prep:"Saltea cebolla/ajo/aceite oliva • tomates 8 min • pescado encima • 15 min tapado"},
+  {n:100,cat:"Dieta Mediterranea",          nom:"Sopa Minestrone Ligera",               ben:"Fibra máxima • Vitaminas completas • Baja calorías", ing:"legumbres",    t:40,  porcs:"6",   nota:"El minestrone tiene más de 20 nutrientes en un solo plato.",                          ing_lista:"frijoles blancos, zanahorias, apio, calabacitas, pasta de lentejas, jitomates, albahaca, aceite oliva",prep:"Saltea mirepoix • jitomates 5 min • caldo/frijoles/verduras • pasta 8 min antes • albahaca"},
+  {n:101,cat:"Dieta Mediterranea",          nom:"Ensalada Griega Sin Queso",            ben:"Vitaminas • Hidratación • Antioxidantes • Low cal",  ing:"vegetariano", t:10,  porcs:"2",   nota:"Sin queso feta tiene menos del 50% de calorías y conserva el 95% de los nutrientes.", ing_lista:"pepinos, jitomates, pimiento rojo y verde, cebolla morada, aceitunas kalamata, orégano, limón, aceite oliva",prep:"Corta todo en cubos • mezcla • aceitunas/orégano generoso • adereza con limón/aceite"},
+  {n:102,cat:"Dieta Mediterranea",          nom:"Sardinas al Limón con Gremolata",      ben:"Omega 3 • Calcio • Vitamina D • Anti-edad",          ing:"pescado",      t:15,  porcs:"2",   nota:"La gremolata transforma cualquier pescado en un plato gourmet mediterráneo.",         ing_lista:"sardinas en agua, limón (ralladura y jugo), perejil picado, ajo picado fino, aceite oliva",           prep:"Mezcla gremolata (perejil/ajo/ralladura) • calienta sardinas • cubre con gremolata"},
+  {n:103,cat:"Dieta Mediterranea",          nom:"Pollo con Alcachofas y Limón",         ben:"Fibra de alcachofa • Proteína • Hígado sano",        ing:"pollo",        t:40,  porcs:"3",   nota:"La alcachofa es la verdura más rica en cinarina que protege el hígado.",              ing_lista:"muslos pollo sin piel, corazones alcachofa, ajo, limón, orégano, tomillo, caldo, aceite oliva",       prep:"Sella pollo • agrega ajo/hierbas/alcachofas/caldo/limón • 25 min tapado"},
+  {n:104,cat:"Dieta Mediterranea",          nom:"Sopa Lentejas Rojas Estilo Turco",     ben:"Proteína • Hierro • Vitamina C • Antiinflamatorio", ing:"legumbres",    t:25,  porcs:"4",   nota:"Esta sopa turca es la más consumida en el Mediterráneo oriental.",                    ing_lista:"lentejas rojas, cebolla, ajo, comino, paprika ahumada, limón, menta seca, caldo",                    prep:"Saltea cebolla/ajo/especias • lentejas/caldo 20 min • licúa parcial • limón/menta"},
+  {n:105,cat:"Dieta Mediterranea",          nom:"Pollo con Tzatziki de Pepino",         ben:"Proteína • Probiótico • Hidratante",                 ing:"pollo",        t:30,  porcs:"2",   nota:"El yogur griego tiene el doble de proteína que el normal y es probiótico natural.",   ing_lista:"pechugas, pepino rallado, yogur griego natural, ajo, orégano, menta, limón",                         prep:"Marina pollo • cuece en olla • exprime pepino • mezcla tzatziki • sirve frío"},
+  {n:106,cat:"Dieta Mediterranea",          nom:"Berenjenas a la Siciliana",            ben:"Antioxidantes • Fibra • Nasunina anti-edad",         ing:"vegetariano", t:30,  porcs:"3",   nota:"La nasunina de la piel morada de la berenjena protege las membranas cerebrales.",      ing_lista:"berenjenas grandes, jitomates, cebolla, ajo, alcaparras, orégano, albahaca, aceite oliva",            prep:"Saltea berenjenas sin aceite 8 min • agrega cebolla/ajo/tomate • alcaparras/hierbas"},
+  {n:107,cat:"Dieta Mediterranea",          nom:"Pulpo a la Gallega Ligero",            ben:"Proteína magra • Zinc • Taurina • Minerales marinos",ing:"pescado",      t:45,  porcs:"3",   nota:"El pulpo tiene 85% de proteína magra y es la fuente más rica en taurina.",            ing_lista:"pulpo cocido, paprika dulce y picante, sal de mar gruesa, perejil fresco, aceite oliva extra virgen",  prep:"Hierve pulpo 35-40 min • corta en rodajas • papas del mismo caldo • paprika/aceite"},
+  {n:108,cat:"Dieta Mediterranea",          nom:"Shakshuka de Huevos en Salsa",         ben:"Licopeno • Proteína • Vitaminas A y C",              ing:"huevo",        t:20,  porcs:"2",   nota:"El licopeno cocinado se absorbe 5 veces mejor que el crudo.",                         ing_lista:"huevos, jitomates licuados, pimiento rojo, cebolla, ajo, comino, paprika, chile seco",                prep:"Saltea cebolla/ajo/pimiento • tomates/especias 10 min • huevos en espacios • tapa 5-7 min"},
+  {n:109,cat:"Dieta Mediterranea",          nom:"Salmón con Salsa de Yogur y Eneldo",   ben:"Omega 3 • Probiótico • Calcio • Vitamina D",         ing:"pescado",      t:20,  porcs:"2",   nota:"El yogur griego como salsa aporta calcio y probióticos sin calorías de crema.",       ing_lista:"filetes salmón, yogur griego natural, eneldo fresco, limón, ajo, pepino rallado",                    prep:"Sella salmón 4 min/lado • mezcla salsa de yogur/eneldo/pepino • sirve frío encima"},
+  {n:110,cat:"Dieta Mediterranea",          nom:"Sopa Garbanzos Estilo Marroquí",       ben:"Proteína vegetal • Hierro • Vitaminas completas",    ing:"legumbres",    t:30,  porcs:"4",   nota:"La canela en platos salados es el secreto marroquí. Estabiliza el azúcar en cada comida.",ing_lista:"garbanzos, espinacas, cebolla, ajo, comino, cúrcuma, canela, caldo, limón",                        prep:"Saltea sofrito con especias 1 min • garbanzos/caldo 15 min • espinacas 3 min • limón"},
+  {n:111,cat:"Dieta Mediterranea",          nom:"Trucha con Hierbas Provenzales",       ben:"Omega 3 • Selenio • Vitamina B12 • Anti-edad",       ing:"pescado",      t:25,  porcs:"2",   nota:"Las hierbas de Provenza tienen 40 compuestos fenólicos. El mejor antiaging culinario.", ing_lista:"filetes trucha, hierbas de Provenza (tomillo, romero, orégano), limón, ajo, aceite oliva",            prep:"Sazona con hierbas/ajo/limón • sella 4 min/lado • tapa 5 min más fuego bajo"},
+  {n:112,cat:"Dieta Mediterranea",          nom:"Gazpacho Blanco de Almendras",         ben:"Grasas buenas • Vitamina E • Refrescante",           ing:"vegetariano", t:15,  porcs:"4",   nota:"El gazpacho blanco andaluz es una de las sopas más antiguas de Europa.",              ing_lista:"almendras remojadas, pepinos, ajo, limón, aceite oliva, vinagre blanco, agua fría",                  prep:"Licúa almendras con agua • agrega pepino/ajo/limón/vinagre • cuela • refrigera 30 min"},
+  {n:113,cat:"DASH y Mediterranea Avanzada",nom:"Bowl DASH-Mediterráneo de Quinoa",     ben:"Proteína completa • Potasio • Sin sodio • Corazón", ing:"legumbres",    t:25,  porcs:"2",   nota:"Este bowl cumple simultáneamente criterios DASH y Mediterráneos.",                    ing_lista:"quinoa, garbanzos, espinacas baby, aguacate, tomates cherry, limón, aceite oliva SIN sal",            prep:"Cocina quinoa • mezcla con garbanzos/espinacas/tomates • aguacate • adereza"},
+  {n:114,cat:"DASH y Mediterranea Avanzada",nom:"Salmón con Tabbouleh y Tzatziki",      ben:"Omega 3 • Probiótico • Proteína triple",             ing:"pescado",      t:30,  porcs:"2",   nota:"Omega-3 nórdico + probiótico griego + granos mediterráneos orientales. Triple sinergia.",ing_lista:"filetes salmón, quinoa, perejil, pepino, limón, yogur griego, eneldo, ajo",                          prep:"Sella salmón • mezcla tabbouleh de quinoa • prepara tzatziki • sirve capas"},
+  {n:115,cat:"DASH y Mediterranea Avanzada",nom:"Pollo DASH con Hierbas y Garbanzos",   ben:"Proteína magra • Fibra DASH • Sin sodio • Potasio", ing:"pollo",        t:35,  porcs:"3",   nota:"Este plato cumple criterios DASH. Aprobado por la American Heart Association.",       ing_lista:"pechugas pollo, garbanzos, ajo, romero, tomillo, orégano, naranja, limón, aceite oliva SIN sal",     prep:"Marina con hierbas/cítricos • sella • agrega garbanzos/marinado • 20 min tapado"},
+  {n:116,cat:"DASH y Mediterranea Avanzada",nom:"Sopa Anticancerígena Mediterránea",    ben:"Sulforafano • Licopeno • Quercetina • Triple antioxidante",ing:"vegetariano",t:35,porcs:"4",nota:"Sulforafano (brócoli) + licopeno (tomate) + quercetina (cebolla). Trío anticanceroso.", ing_lista:"brócoli, jitomates maduros, cebolla grande, ajo, frijoles blancos, cúrcuma, pimienta, orégano, aceite oliva",prep:"Rostiza jitomates/cebolla • agrega brócoli/ajo/caldo • frijoles/especias • cuece"},
+  {n:117,cat:"DASH y Mediterranea Avanzada",nom:"Ensalada DASH Betabel Naranja Nueces", ben:"Nitrato • Potasio • Omega 3 vegetal • Completo",     ing:"vegetariano", t:35,  porcs:"2",   nota:"Betabel + naranja + nueces = nitrato + vitamina C + omega-3 vegetal. Triple golpe.",  ing_lista:"betabeles, naranjas en gajos, nueces, arúgula, vinagre balsámico, aceite oliva SIN sal",              prep:"Cuece betabeles 30 min • cubos tibios • mezcla con naranja/arúgula/nueces • adereza"},
+  {n:118,cat:"DASH y Mediterranea Avanzada",nom:"Pescado DASH Salsa Verde Mediterránea",ben:"Omega 3 • Sin sodio • Clorofila • Antiox total",     ing:"pescado",      t:25,  porcs:"2",   nota:"La salsa verde mediterránea tiene más clorofila que 10 porciones de espinacas.",      ing_lista:"filetes robalo o salmón, perejil, albahaca, ajo, limón, aceite oliva, alcaparras SIN sal",            prep:"Licúa salsa verde con aceite/limón • sella pescado sin sal • salsa fría encima"},
+  {n:119,cat:"DASH y Mediterranea Avanzada",nom:"Lentejas DASH con Verduras Mediterráneas",ben:"Proteína vegetal • Hierro • Potasio • Sin sodio",ing:"legumbres",    t:30,  porcs:"4",   nota:"Las lentejas con verduras mediterráneas son el plato base del estudio PREDIMED.",     ing_lista:"lentejas verdes, zanahorias, apio, cebolla, ajo, jitomates, orégano, comino, cúrcuma, aceite oliva SIN sal",prep:"Saltea verduras con aceite oliva • lentejas/agua/especias SIN sal • 25 min • limón"},
+  {n:120,cat:"DASH y Mediterranea Avanzada",nom:"Golden Bowl Camote Salmón Aguacate",   ben:"Omega 3 • Beta-caroteno • Grasas buenas • Completo total",ing:"pescado",  t:30,  porcs:"2",   nota:"5 colores = 5 fitonutrientes distintos. La receta más completa del recetario.",       ing_lista:"camotes, filetes salmón, aguacate, espinacas baby, limón, cúrcuma, jengibre rallado, sésamo, cebollín",prep:"Cuece camotes vapor • sella salmón • camote abierto/espinacas/salmón/aguacate • cúrcuma/limón"},
+];
+
+/* ══════════════════════════════════════════
+   SELECTED RECIPE
+══════════════════════════════════════════ */
+let selectedRecipe = null;
+
+/* ══════════════════════════════════════════
+   TABS
+══════════════════════════════════════════ */
+function showTab(id) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-'+id).classList.add('active');
+  event.currentTarget.classList.add('active');
+}
+
+/* ══════════════════════════════════════════
+   RENDER RECIPES
+══════════════════════════════════════════ */
+function renderRecipes(list) {
+  const grid = document.getElementById('recipe-grid');
+  const badge = document.getElementById('count-badge');
+  badge.textContent = list.length + ' recetas';
+  grid.innerHTML = '';
+  list.forEach(r => {
+    const card = document.createElement('div');
+    card.className = 'recipe-card' + (selectedRecipe && selectedRecipe.n === r.n ? ' selected' : '');
+    card.innerHTML = `
+      <div class="rc-num">RECETA #${String(r.n).padStart(3,'0')}</div>
+      <div class="rc-name">${r.nom}</div>
+      <div class="rc-meta">
+        <span class="rc-tag">${r.t < 20 ? '⚡ '+r.t+' min' : r.t <= 40 ? '⏱ '+r.t+' min' : '🕐 '+r.t+' min'}</span>
+        <span class="rc-tag">${ingEmoji(r.ing)} ${r.ing}</span>
+        <span class="rc-tag">${r.porcs} porciones</span>
+      </div>
+      <div class="rc-benefit">${r.ben}</div>
+      <button class="rc-select-btn" onclick="selectRecipe(${r.n})">
+        ${selectedRecipe && selectedRecipe.n === r.n ? '✓ SELECCIONADA' : '✦ SELECCIONAR PARA POST'}
+      </button>`;
+    grid.appendChild(card);
+  });
+}
+
+function ingEmoji(ing) {
+  const e = {pollo:'🐔',pescado:'🐟',res:'🥩',pavo:'🦃',huevo:'🥚',legumbres:'🫘',vegetariano:'🥦'};
+  return e[ing] || '🍽';
+}
+
+function selectRecipe(n) {
+  selectedRecipe = RECETAS.find(r => r.n === n);
+
+  // update grid
+  document.querySelectorAll('.recipe-card').forEach(c => c.classList.remove('selected'));
+  renderRecipes(currentList);
+
+  // update select dropdown in generator
+  const sel = document.getElementById('g-receta');
+  sel.value = n;
+
+  // update banner in generator tab
+  const banner = document.getElementById('selected-banner');
+  document.getElementById('srb-num').textContent = '#' + String(n).padStart(3,'0');
+  document.getElementById('srb-name').textContent = selectedRecipe.nom;
+  document.getElementById('srb-meta').textContent = selectedRecipe.cat + ' • ' + selectedRecipe.t + ' min • ' + selectedRecipe.porcs + ' porciones';
+  banner.classList.add('visible');
+
+  // show toast and switch to generator tab
+  toast('✦ RECETA #' + String(n).padStart(3,'0') + ' SELECCIONADA · ABRE "GENERAR POST"');
+}
+
+/* ══════════════════════════════════════════
+   FILTER
+══════════════════════════════════════════ */
+let currentList = RECETAS;
+
+function filtrarRecetas() {
+  const cat    = document.getElementById('f-cat').value;
+  const ing    = document.getElementById('f-ing').value;
+  const tiempo = document.getElementById('f-tiempo').value;
+
+  currentList = RECETAS.filter(r => {
+    if (cat && r.cat !== cat) return false;
+    if (ing && r.ing !== ing) return false;
+    if (tiempo === 'rapido' && r.t >= 20) return false;
+    if (tiempo === 'medio'  && (r.t < 20 || r.t > 40)) return false;
+    if (tiempo === 'largo'  && r.t <= 40) return false;
+    return true;
+  });
+
+  renderRecipes(currentList);
+  toast('✦ ' + currentList.length + ' RECETAS ENCONTRADAS');
+}
+
+/* ══════════════════════════════════════════
+   GENERATE POST (María Prieto Structure)
+══════════════════════════════════════════ */
+function generarPost() {
+  const nSel  = parseInt(document.getElementById('g-receta').value);
+  const red   = document.getElementById('g-red').value;
+  const meta  = document.getElementById('g-meta').value;
+  const tono  = document.getElementById('g-tono').value;
+
+  let receta = selectedRecipe;
+  if (nSel) receta = RECETAS.find(r => r.n === nSel) || receta;
+
+  if (!receta) {
+    toast('⚠ SELECCIONA UNA RECETA PRIMERO');
+    return;
+  }
+
+  const loading = document.getElementById('loading-post');
+  const output  = document.getElementById('post-output');
+  loading.classList.add('visible');
+  output.classList.remove('visible');
+  output.innerHTML = '';
+
+  setTimeout(() => {
+    const post = buildPost(receta, red, meta, tono);
+    loading.classList.remove('visible');
+    output.innerHTML = post;
+    output.classList.add('visible');
+    output.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    toast('✦ POST MAGNÉTICO GENERADO');
+  }, 1400);
+}
+
+function buildPost(r, red, meta, tono) {
+  const ganchos = getGancho(r, meta);
+  const problema = getProblema(meta, tono);
+  const puente   = getPuente(meta);
+  const recetaTxt= getRecetaTxt(r);
+  const dato     = r.nota;
+  const equipoTxt= getEquipo(r);
+  const cta      = getCTA(red, r);
+  const emojis   = red === 'TikTok' ? true : red === 'Instagram';
+
+  const seccion = (lbl, txt, cls='') => `
+    <div class="post-section ${cls}">
+      <span class="post-section-lbl">${lbl}</span>
+      <div class="post-section-txt">${txt}</div>
+    </div>`;
+
+  const content = `
+    ${seccion('🎯 GANCHO — Para el scroll', ganchos, 'hook')}
+    ${seccion('💔 PROBLEMA — Nombra el dolor', problema)}
+    ${seccion('🌉 PUENTE — La esperanza existe', puente)}
+    ${seccion('🍳 RECETA #' + String(r.n).padStart(3,'0') + ' — ' + r.nom, recetaTxt)}
+    ${seccion('🔬 DATO CIENTÍFICO', dato)}
+    ${seccion('🫙 MENCIÓN SUTIL DEL EQUIPO', equipoTxt)}
+    ${seccion('📣 LLAMADA A LA ACCIÓN', cta, 'cta')}
+    <div class="post-actions">
+      <button class="btn-action btn-copy" onclick="copyPost(this)">⧉ Copiar Post Completo</button>
+      <button class="btn-action btn-img" onclick="toggleImgPrompt()">📷 Ver Prompt de Imagen</button>
+      <button class="btn-action btn-new" onclick="generarPost()">↺ Regenerar Post</button>
+    </div>
+    <div id="img-prompt-inline" class="img-prompt-panel">
+      <div class="img-prompt-title">PROMPT PARA GEMINI / GPT-4o · IMAGEN HIPERREALISTA 4K</div>
+      <div class="img-prompt-box">${buildImgPrompt(r)}</div>
+      <button class="btn-copy-img" onclick="copyImgPromptInline()">⧉ Copiar Prompt de Imagen</button>
+    </div>`;
+
+  return content;
+}
+
+function getGancho(r, meta) {
+  const ganchos = {
+    'bajar de peso sin pasar hambre': [
+      `¿Cuántas veces has comido "sano" y a las 2 horas ya tienes hambre de nuevo?\n\nNo es falta de voluntad. Es que nadie te enseñó a comer lo que realmente te llena.`,
+      `La báscula lleva meses diciéndote la misma historia. Y tú llevas meses haciéndolo todo bien.\n\n¿Y si el problema no eres tú?`,
+      `Dato: El 87% de las mujeres que hacen dieta la recuperan en menos de 12 meses.\n\nNo porque fallen. Porque nadie les enseñó a comer SIN pasar hambre.`
+    ],
+    'ganar musculo y proteina': [
+      `¿Llevas meses entrenando y tu cuerpo no cambia?\n\nEl problema no es tu rutina. Es tu plato.`,
+      `Los músculos no se construyen en el gimnasio.\n\nSe construyen en la cocina, mientras duermes, con lo que comiste horas antes.`,
+      `Sin los aminoácidos correctos, todo ese esfuerzo en el gym… se va al drenaje.`
+    ],
+    'tener mas energia y vitalidad': [
+      `¿Te despiertas cansada después de 8 horas de sueño?\n\nTu cuerpo no tiene un problema de descanso. Tiene un problema de nutrición.`,
+      `La fatiga crónica no es normal. Es una señal.\n\nY la respuesta casi siempre está en lo que comes —no en lo que tomas.`,
+      `3pm. La caída de energía del día. ¿Sabías que se puede eliminar completamente con desayunar diferente?`
+    ],
+    'mejorar la digestión y el intestino': [
+      `¿Comes bien y aun así te sientes inflamada después de cada comida?\n\nNo es el alimento. Es cómo lo preparas.`,
+      `El 70% de tu sistema inmune vive en tu intestino.\n\nCuídalo y él te cuidará a ti.`,
+      `La hinchazón después de comer no es normal. Tu intestino está tratando de decirte algo.`
+    ],
+    'reducir inflamacion y dolor': [
+      `Hay alimentos que inflaman. Y hay alimentos que sanan.\n\nEl problema es que nadie te dijo cuáles son cuáles.`,
+      `Los dolores crónicos no son solo una cuestión de edad.\n\nLa inflamación silenciosa que los causa se controla desde el plato.`,
+      `¿Y si te dijera que 3 ingredientes en tu cocina tienen más poder antiinflamatorio que muchos medicamentos?`
+    ],
+    'controlar la presion arterial naturalmente': [
+      `¿Tomas medicamento para la presión pero nunca te hablaron de lo que puedes comer?\n\nHay alimentos que la reducen 10 puntos en una hora.`,
+      `La sal no es el único enemigo de tu presión arterial.\n\nEl verdadero problema es lo que falta en tu plato, no solo lo que sobra.`,
+      `Tu corazón trabaja 24/7 para ti. Esta receta trabaja 24/7 para él.`
+    ],
+    'comer como las mujeres mediterráneas que envejecen radiantes': [
+      `Las mujeres mediterráneas no cuentan calorías, no hacen dieta y envejecen radiantes.\n\n¿Cuál es su secreto?`,
+      `En Grecia, España e Italia las mujeres comen pasta, pan y aceite de oliva.\n\nY tienen la menor tasa de enfermedades cardiovasculares del mundo. ¿Por qué?`,
+      `La dieta más estudiada de la historia no prohíbe ningún grupo de alimentos.\n\nSolo enseña a elegir los correctos.`
+    ]
+  };
+
+  const arr = ganchos[meta] || ganchos['bajar de peso sin pasar hambre'];
+  return arr[Math.floor(Math.random() * arr.length)];
+}
+
+function getProblema(meta, tono) {
+  const base = {
+    'bajar de peso sin pasar hambre': `Llevas meses contando calorías, evitando carbohidratos, saltándote comidas.\nY tu cuerpo responde con más hambre, más antojos y más frustración.\n\nNo estás fallando. El sistema que te enseñaron simplemente no funciona para tu cuerpo.`,
+    'ganar musculo y proteina': `Entrenas 4 veces a la semana. Sudas, te dueles, te sacrificas.\nPero cuando te miras al espejo, el cambio no llega.\n\nTu cuerpo no está recibiendo los materiales que necesita para reconstruirse.`,
+    'tener mas energia y vitalidad': `El café ya no te funciona como antes. La tarde es un abismo.\nTe arrastras hasta la cama y mañana empieza igual.\n\nEso no es envejecer. Es una deficiencia nutricional que tu plato puede resolver hoy.`,
+    'mejorar la digestión y el intestino': `Come y te inflas. Comes diferente y igual te inflas.\nEl malestar digestivo se volvió tu estado normal.\n\nTu intestino lleva meses pidiéndote ayuda. Hoy le vas a dar lo que necesita.`,
+    'reducir inflamacion y dolor': `Los dolores que "son del cuerpo", la rigidez matutina, la fatiga que no cede.\nEstos no son síntomas de edad. Son síntomas de inflamación.\n\nY la inflamación tiene nombre y apellido en tu plato.`,
+    'controlar la presion arterial naturalmente': `El doctor te dijo "cuida lo que comes" pero nunca te explicó exactamente cómo.\nSigues con la presión alta, sigues con el miedo, sigues sin saber qué poner en tu plato.\n\nHoy eso cambia.`,
+    'comer como las mujeres mediterráneas que envejecen radiantes': `Te han vendido suplementos, cremas y dietas restrictivas.\nMientras las mujeres del Mediterráneo envejecen comiendo pan, aceitunas y pasta.\n\nEl secreto no está en lo que evitan. Está en lo que eligen.`
+  };
+  return base[meta] || base['bajar de peso sin pasar hambre'];
+}
+
+function getPuente(meta) {
+  const puentes = [
+    `La solución existe y es mucho más simple de lo que te han hecho creer.\nNo requiere suplementos caros, ni ingredientes imposibles, ni horas en la cocina.\n\nRequiere saber qué combinar. Y hoy te lo muestro.`,
+    `No necesitas cambiar todo. Solo necesitas cambiar una cosa a la vez.\nY esta receta es el mejor lugar para empezar.`,
+    `Lo que tu cuerpo necesita ya existe en tu cocina.\nSolo hay que saber cómo usarlo. Mira esto 👇`,
+  ];
+  return puentes[Math.floor(Math.random() * puentes.length)];
+}
+
+function getRecetaTxt(r) {
+  const ings = r.ing_lista.split(',').slice(0,4).map(i => i.trim()).join(', ');
+  return `✨ ${r.nom.toUpperCase()}\n\n🎯 Beneficio: ${r.ben}\n⏱ ${r.t} minutos · ${r.porcs} porciones\n\n🛒 Ingredientes clave: ${ings}${r.ing_lista.split(',').length > 4 ? ' (y más)' : ''}\n\n👩‍🍳 Lo más importante: ${r.prep}`;
+}
+
+function getEquipo(r) {
+  const menciones = [
+    `Y lo mejor de todo: esta receta se prepara en olla de acero quirúrgico, lo que significa que cocinas sin aceite y conservas hasta el 90% de los nutrientes. Tu comida saludable potenciada al máximo.`,
+    `El secreto de la preparación está en el acero quirúrgico: sin aceite, sin perder nutrientes, con todo el sabor. Así es como cocino yo y así es como obtienes el 100% del beneficio de cada ingrediente.`,
+    `Dato que cambia todo: en olla de acero quirúrgico esta receta reduce hasta 80% las calorías de la preparación sin perder ningún nutriente. El equipo que uso cada vez que cocino esto.`
+  ];
+  return menciones[Math.floor(Math.random() * menciones.length)];
+}
+
+function getCTA(red, r) {
+  const ctas = {
+    Instagram: [
+      `💾 Guarda este post para la próxima vez que no sepas qué cocinar. Esto es exactamente lo que necesitas.\n\n¿Lo has probado o algo parecido? Cuéntame en los comentarios 👇`,
+      `🔖 Guarda esto. Mándalo a esa amiga que siempre dice que no tiene tiempo para comer bien.\n\n¿Cuál es tu receta favorita cuando quieres ${r.ben.split('•')[0].trim().toLowerCase()}? 👇`,
+      `💡 Etiqueta a una amiga que necesita escuchar esto hoy.\n\nY cuéntame: ¿Qué ingrediente de esta receta ya tienes en casa? 🍳`
+    ],
+    Facebook: [
+      `📌 Guarda esta receta en tu muro para tenerla siempre a mano. Compártela con quien la necesite.\n\n¿Has cocinado algo parecido? ¡Cuéntame tu experiencia! 💬`,
+      `Comparte este post con tu grupo de mamás, amigas o familia. Que todas puedan beneficiarse de esta receta.\n\n¿Cuál es tu duda sobre este platillo? La respondo abajo 👇`,
+    ],
+    TikTok: [
+      `⚡ Guárdalo antes de que lo pierdas. Mañana no lo vas a encontrar.\n🔁 Comparte con quien lo necesite NOW.`,
+      `💬 Comenta "RECETA" y te mando el PDF completo con las 120 recetas.\nSigueme para más tips de nutrición sin filtros 🔥`,
+    ],
+    'WhatsApp': [
+      `Guarda este mensaje o mándalo a quien lo necesite. A veces la receta que cambia todo llega así, en un mensaje. 💚`,
+      `Comparte con el grupo familiar. Esta receta les va a encantar y les hace un bien enorme a todos. ❤️`,
+    ]
+  };
+
+  const arr = ctas[red] || ctas['Instagram'];
+  return arr[Math.floor(Math.random() * arr.length)];
+}
+
+function buildImgPrompt(r) {
+  return `PROMPT PARA GEMINI / GPT-4o (COPIA EXACTAMENTE):
+
+"Imagen hiperrealista 4K de '${r.nom}' presentado en una mesa de cocina moderna y elegante. La mesa muestra el platillo principal perfectamente emplatado para 3-4 personas, acompañado de un vaso de agua con rodajas de limón, un jugo natural de colores vibrantes y una taza de café. Iluminación natural cálida desde una ventana lateral.
+
+Carola Baena, mujer mexicana de 35 años, tez morena clara, cabello oscuro recogido, vestida de chef blanco impecable, de pie junto a la mesa mostrando el platillo con orgullo y una sonrisa auténtica. Su actitud es segura y cálida, como una chef profesional que comparte su mejor receta.
+
+El ambiente es una cocina moderna con acabados en mármol blanco y acentos en madera clara. En el fondo, detalles de ingredientes frescos: ${r.ing_lista.split(',').slice(0,3).join(', ')}.
+
+Estilo editorial gastronómico de revista. Composición en formato vertical 4:5. Sin texto superpuesto. Ultra nítido, colores vibrantes y cálidos, máxima calidad fotográfica."`;
+}
+
+/* ══════════════════════════════════════════
+   COPY FUNCTIONS
+══════════════════════════════════════════ */
+function copyPost(btn) {
+  const output = document.getElementById('post-output');
+  const sections = output.querySelectorAll('.post-section-txt');
+  let text = '';
+  sections.forEach(s => {
+    text += s.innerText.trim() + '\n\n';
+  });
+  navigator.clipboard.writeText(text.trim()).then(() => toast('✦ POST COPIADO AL PORTAPAPELES'));
+}
+
+function toggleImgPrompt() {
+  const panel = document.getElementById('img-prompt-inline');
+  if (!panel) return;
+  panel.classList.toggle('visible');
+  if (panel.classList.contains('visible')) panel.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+
+function copyImgPromptInline() {
+  const box = document.querySelector('#img-prompt-inline .img-prompt-box');
+  if (box) navigator.clipboard.writeText(box.innerText).then(() => toast('✦ PROMPT DE IMAGEN COPIADO'));
+}
+
+/* ══════════════════════════════════════════
+   IMAGE PROMPT TAB
+══════════════════════════════════════════ */
+function buildImgPromptFromInput() {
+  const platillo = document.getElementById('img-platillo').value.trim() || '[nombre del platillo]';
+  return `"Imagen hiperrealista 4K de '${platillo}' presentado en una mesa de cocina moderna y elegante. La mesa muestra el platillo principal perfectamente emplatado para 3-4 personas, acompañado de un vaso de agua con rodajas de limón, un jugo natural de colores vibrantes y una taza de café. Iluminación natural cálida desde una ventana lateral.
+
+Carola Baena, mujer mexicana de 35 años, tez morena clara, cabello oscuro recogido, vestida de chef blanco impecable, de pie junto a la mesa mostrando el platillo con orgullo y una sonrisa auténtica. Su actitud es segura y cálida, como una chef profesional que comparte su mejor receta.
+
+El ambiente es una cocina moderna con acabados en mármol blanco y acentos en madera clara. En el fondo, detalles de ingredientes frescos y naturales relacionados con el platillo.
+
+Estilo editorial gastronómico de revista. Composición en formato vertical 4:5. Sin texto superpuesto. Ultra nítido, colores vibrantes y cálidos, máxima calidad fotográfica."`;
+}
+
+function updateImgPrompt() {
+  document.getElementById('img-prompt-display').textContent = buildImgPromptFromInput();
+}
+
+function copyImgPrompt() {
+  const txt = document.getElementById('img-prompt-display').innerText;
+  navigator.clipboard.writeText(txt).then(() => toast('✦ PROMPT COPIADO'));
+}
+
+/* ══════════════════════════════════════════
+   TOAST
+══════════════════════════════════════════ */
+function toast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2800);
+}
+
+/* ══════════════════════════════════════════
+   INIT
+══════════════════════════════════════════ */
+function init() {
+  // Populate recipe select in generator
+  const sel = document.getElementById('g-receta');
+  RECETAS.forEach(r => {
+    const opt = document.createElement('option');
+    opt.value = r.n;
+    opt.textContent = `#${String(r.n).padStart(3,'0')} · ${r.nom}`;
+    sel.appendChild(opt);
+  });
+
+  // Render all recipes
+  renderRecipes(RECETAS);
+
+  // Init image prompt display
+  updateImgPrompt();
+}
+
+init();
+</script>
+</body>
+</html>
